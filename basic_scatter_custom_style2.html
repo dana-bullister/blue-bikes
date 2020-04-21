@@ -77,23 +77,25 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
 
   graph_elems.selectAll(".tick line").attr("stroke", "white")
 
-  // get color: given a species name, return a color
-  let get_color = d3.scaleOrdinal()
+  // get shape: given a species name, return a shape
+  let get_shape = d3.scaleOrdinal()
     .domain(["setosa", "versicolor", "virginica" ])
-    .range([ "#F8766D", "#00BA38", "#619CFF"]);
+    .range([ d3.symbolCircle, d3.symbolTriangle, d3.symbolSquare])
 
   // binding data
   let data_points = graph_elems
     .selectAll("data_points")
     .data(sample_data)
     .enter()
-    .append("circle")
-      .attr("cx", function (d) { return x(d.Sepal_Length); } )
-      .attr("cy", function (d) { return y(d.Petal_Length); } )
-      .attr("r", 5)
-      .style("fill", function (d) { return get_color(d.Species) } )
+    .append("path")
+      .attr("d", d3.symbol()
+        .size(120)
+        .type(function(d) {  return get_shape(d.Species) })
+      )
+      .attr("transform", function(d) { return "translate(" + x(d.Sepal_Length) + "," + y(d.Petal_Length) + ")"; })
+      .style("fill", "black")
+      .style("opacity", 0.8)
       .attr("class", "data_point");
-
 });
 
 </script>
