@@ -7,9 +7,9 @@
 
 <script>
 
-let margin = {top: 10, right: 30, bottom: 30, left: 60},
-    container_width = 460,
-    container_height = 400,
+let margin = {top: 10, right: 30, bottom: 40, left: 50},
+    container_width = 520,
+    container_height = 520,
     graph_width = container_width - margin.left - margin.right,
     graph_height = container_height - margin.top - margin.bottom;
 
@@ -19,36 +19,68 @@ let graph_obj = graph_div
   .append("svg")
     .attr("id", "graph_obj")
     .attr("width", container_width)
-    .attr("height", container_height)
-    .attr("style", "background: lightgrey");
+    .attr("height", container_height);
 let graph_elems = graph_obj
   .append("g")
     .attr("id", "graph_elems")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+// add grey background
+graph_elems
+  .append("rect")
+    .attr("x",0)
+    .attr("y",0)
+    .attr("height", graph_height)
+    .attr("width", graph_width)
+    .style("fill", "EBEBEB");
+
+// add x axis label
+graph_elems.append("text")
+    .attr("text-anchor", "end")
+    .attr("x", graph_width/2 + margin.left)
+    .attr("y", graph_height + margin.top + 20)
+    .text("Sepal Length");
+
+// add y axis label
+graph_elems.append("text")
+    .attr("text-anchor", "end")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left + 20)
+    .attr("x", -margin.top - graph_height/2 + 20)
+    .text("Petal Length")
+
 // read data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(sample_data) {
+d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function(sample_data) {
 
   // add x axis
   let x = d3.scaleLinear()
-    .domain([0, 4000])
+    .domain([4*0.95, 8*1.001])
     .range([0, graph_width]);
 
   let x_axis = graph_elems
     .append('g')
       .attr("id", "x_axis")
       .attr("transform", "translate(0," + graph_height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x).tickSize(-graph_height*1.3).ticks(10))
+      .select(".domain").remove();
 
   // add y axis
   let y = d3.scaleLinear()
-      .domain([0, 500000])
-      .range([graph_height, 0]);
+      .domain([-0.001, 9*1.01])
+      .range([ graph_height, 0]);
 
   let y_axis = graph_elems
     .append('g')
       .attr("id", "y_axis")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y).tickSize(-graph_width*1.3).ticks(10))
+      .select(".domain").remove();
+
+  graph_elems.selectAll(".tick line").attr("stroke", "white")
+
+  // get color: given a species name, return a color
+  let get_color = d3.scaleOrdinal()
+    .domain(["setosa", "versicolor", "virginica" ])
+    .range([ "#F8766D", "#00BA38", "#619CFF"]);
 
   // binding data
   let data_points = graph_elems
@@ -56,11 +88,11 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     .data(sample_data)
     .enter()
     .append("circle")
-      .attr("cx", function(d){ return x(d.GrLivArea) })
-      .attr("cy", function(d){ return y(d.SalePrice) })
-      .attr("class", "data_point")
-      .attr("fill", "#69b3a2")
-      .attr("r", 1.5);
+      .attr("cx", function (d) { return x(d.Sepal_Length); } )
+      .attr("cy", function (d) { return y(d.Petal_Length); } )
+      .attr("r", 5)
+      .style("fill", function (d) { return get_color(d.Species) } )
+      .attr("class", "data_point");
 
 });
 
