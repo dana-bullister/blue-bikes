@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- playing with basic functionality of d3 including margins, data binding, basic scatter plots, scales, transitions -->
 
 <div id="graph_div"></div>
 
@@ -25,6 +26,7 @@ let graph_elems = graph_obj
     .attr("id", "graph_elems")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+// x scale and axis
 let x = d3.scaleLinear()
   .domain([0, 100])
   .range([0, graph_width]);
@@ -35,6 +37,7 @@ let x_axis = graph_elems
     .attr("transform", "translate(0," + graph_height + ")")
     .call(d3.axisBottom(x));
 
+// y scale and axis
 let y = d3.scaleLinear()
     .domain([0, 100])
     .range([graph_height, 0]);
@@ -44,8 +47,15 @@ let y_axis = graph_elems
     .attr("id", "y_axis")
     .call(d3.axisLeft(y));
 
-let my_data = [ {x:80, y:50, r:20, dur:1800, delay:1800, color:"blue"}, {x:40, y:90, r: 10, dur:2800, delay:2800, color:"green"}, {x:10, y:20, r:4, dur:2800, delay:3800, color:"red" } ]
+// data
+let my_data = [
+  {x:50, y:20, r:23, dur:1400, delay:1400, color:"pink"},
+  {x:80, y:50, r:20, dur:1800, delay:1800, color:"blue"},
+  {x:40, y:60, r:18, dur:1600, delay:2300, color:"purple"},
+  {x:40, y:90, r: 10, dur:2800, delay:2800, color:"green"},
+  {x:10, y:20, r:4, dur:2800, delay:3800, color:"red" }]
 
+// binding data
 let data_points = graph_elems
   .selectAll("data_points")
   .data(my_data)
@@ -57,16 +67,16 @@ let data_points = graph_elems
     .attr("fill", function(d){ return d.color })
     .attr("r", function(d){ return d.r });
 
-console.log(my_data)
-my_data = [ {x:80, y:50, r:20, dur:1800, delay:1800, color:"blue"} ]
-console.log(my_data)
+// experiment with exit() function
+/*my_data.pop()
 
 graph_elems
   .selectAll(".data_point")
   .data(my_data)
   .exit()
-  .remove();
+  .remove();*/
 
+// add transition
 let trans_0 = d3.selectAll(".data_point")
    .transition("trans_0")
      .delay(function(d) { return d.delay;})
