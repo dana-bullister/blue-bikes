@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- playing with basic functionality of d3 including margins, data binding, basic scatter plots, scales, transitions -->
+
+<div id="graph_div"></div>
+
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<script>
+
+let margin = {top: 10, right: 30, bottom: 30, left: 60},
+    container_width = 460,
+    container_height = 400,
+    graph_width = container_width - margin.left - margin.right,
+    graph_height = container_height - margin.top - margin.bottom;
+
+let graph_div = d3.select("#graph_div")
+  .attr("id", "graph_div")
+let graph_obj = graph_div
+  .append("svg")
+    .attr("id", "graph_obj")
+    .attr("width", container_width)
+    .attr("height", container_height)
+    .attr("style", "background: lightgrey");
+let graph_elems = graph_obj
+  .append("g")
+    .attr("id", "graph_elems")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// read data
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(sample_data) {
+
+  // add x axis
+  let x = d3.scaleLinear()
+    .domain([0, 4000])
+    .range([0, graph_width]);
+
+  let x_axis = graph_elems
+    .append('g')
+      .attr("id", "x_axis")
+      .attr("transform", "translate(0," + graph_height + ")")
+      .call(d3.axisBottom(x));
+
+  // add y axis
+  let y = d3.scaleLinear()
+      .domain([0, 500000])
+      .range([graph_height, 0]);
+
+  let y_axis = graph_elems
+    .append('g')
+      .attr("id", "y_axis")
+      .call(d3.axisLeft(y));
+
+  // binding data
+  let data_points = graph_elems
+    .selectAll("data_points")
+    .data(sample_data)
+    .enter()
+    .append("circle")
+      .attr("cx", function(d){ return x(d.GrLivArea) })
+      .attr("cy", function(d){ return y(d.SalePrice) })
+      .attr("class", "data_point")
+      .attr("fill", "#69b3a2")
+      .attr("r", 1.5);
+
+});
+
+</script>
