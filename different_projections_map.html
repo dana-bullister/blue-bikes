@@ -28,8 +28,7 @@ let map_projection = d3.geoNaturalEarth()
 //let map_projection = d3.geoAzimuthalEqualArea()
 //let map_projection = d3.geoBaker()
 //let map_projection = d3.geoBoggs()
-    .center([2,47])
-    .scale(980)
+    .scale(map_width / 1.3 / Math.PI)
     .translate([map_width / 2, map_height / 2])
 
 // Load external data
@@ -38,7 +37,7 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
     // draw the map
     my_map.append("g")
       .selectAll("map_features")
-      .data(map_data.features.filter(function(d) { return d.properties.name == "France"}))
+      .data(map_data.features)
       .enter() // for each each data point
         .append("path")
           .attr("fill", "green")
