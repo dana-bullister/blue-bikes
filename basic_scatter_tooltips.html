@@ -50,11 +50,11 @@ graph_elems.append("text")
     .text("Petal Length")
 
 // read data
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function(sample_data) {
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(sample_data) {
 
   // add x axis
   let x = d3.scaleLinear()
-    .domain([4*0.95, 8*1.001])
+    .domain([0, 3000])
     .range([0, graph_width]);
 
   let x_axis = graph_elems
@@ -66,7 +66,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
 
   // add y axis
   let y = d3.scaleLinear()
-      .domain([-0.001, 9*1.01])
+      .domain([0, 400000])
       .range([ graph_height, 0]);
 
   let y_axis = graph_elems
@@ -85,14 +85,16 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
   // binding data
   let data_points = graph_elems
     .selectAll("data_points")
-    .data(sample_data)
+    .data(sample_data.filter(function(d,i){return i<50}))
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.Sepal_Length); } )
-      .attr("cy", function (d) { return y(d.Petal_Length); } )
-      .attr("r", 5)
-      .style("fill", function (d) { return get_color(d.Species) } )
-      .attr("class", "data_point");
+      .attr("cx", function (d) { return x(d.GrLivArea); } )
+      .attr("cy", function (d) { return y(d.SalePrice); } )
+      .attr("r", 7)
+      .style("fill", "#69b3a2")
+      .style("opacity", 0.3)
+      .style("stroke", "white")
+      .attr("class", "data_point")
 
 });
 
