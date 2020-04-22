@@ -71,9 +71,14 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
       .attr("fill", "#69b3a2")
       .attr("r", 1.5);
 
+  // called on at end of brush stroke
+  function updateChart() {
+  }
   // add brush area
   graph_obj
-    .call(d3.brush());
+    .call(d3.brush()
+      .on("start brush", updateChart)
+    );
 
 });
 
