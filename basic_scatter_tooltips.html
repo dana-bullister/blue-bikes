@@ -112,8 +112,6 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
   // make invisible when leave a point
   let mouseleave = function(d) {
     tooltip
-      .transition()
-        .duration(200)
       .style("opacity", 0)
   }
 
