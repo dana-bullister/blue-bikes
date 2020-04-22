@@ -41,6 +41,7 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
       .enter() // for each each data point
         .append("path")
           .attr("fill", "green")
+          .attr("id", "my_path")
           .attr("d", d3.geoPath()
               .projection(map_projection)
           )
