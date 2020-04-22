@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
-<!-- Load d3.js and relevant mapping libraries -->
+<!-- Load d3.js and projection library -->
 <script src="https://d3js.org/d3.v4.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 
 <!-- create an svg element where the map will live -->
-<svg id="my_map" width="400" height="300"></svg>
+<svg id="my_map"></svg>
 
 <script>
 
 // store some variables for svg and attributes
 let my_map = d3.select("#my_map"),
-    map_width = +my_map.attr("width"),
-    map_height = +my_map.attr("height");
+    map_width = 400,
+    map_height = 300;
+
+// set width and height
+my_map
+    .attr("width",map_width)
+    .attr("height",map_height);
 
 // set projection, scale, and position
 let map_projection = d3.geoNaturalEarth()
