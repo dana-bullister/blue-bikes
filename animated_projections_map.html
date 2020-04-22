@@ -46,6 +46,15 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
               .projection(map_projection)
           )
           .style("stroke", "white");
+
+    // update map projection
+    map_projection = d3.geoAiry()
+    data_points
+      .transition()
+        .duration(2000)
+      .attr("d", d3.geoPath()
+          .projection(map_projection))
+
 })
 
 </script>
