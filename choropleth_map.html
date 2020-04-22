@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
-<!-- Load d3.js and projection library -->
+<!-- Load d3.js, color scale, and projection library -->
 <script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 
 <!-- create an svg element where the map will live -->
@@ -25,20 +26,33 @@ let map_projection = d3.geoNaturalEarth()
     .scale(map_width / 1.3 / Math.PI)
     .translate([map_width / 2, map_height / 2])
 
-// Load external data
-d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(map_data){
+// load d3 map and color scale variables
+let background_map_data = d3.map();
+var color_scale = d3.scaleThreshold()
+  .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+  .range(d3.schemeBlues[7]);
 
-    // draw the map
-    my_map.append("g")
-      .selectAll("map_features")
-      .data(map_data.features)
-      .enter() // for each each data point
-        .append("path")
-          .attr("fill", "green")
-          .attr("d", d3.geoPath()
-              .projection(map_projection)
-          )
-          .style("stroke", "white")
-})
+// Load external data
+d3.queue()
+  .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+  .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { background_map_data.set(d.code, +d.pop); })
+  .await(ready);
+
+function ready(error, topo) {
+
+  // draw the map
+  my_map.append("g")
+    .selectAll("path")
+    .data(topo.features)
+    .enter()
+      .append("path") // draw each country
+        .attr("d", d3.geoPath()
+          .projection(map_projection)
+        )
+        .attr("fill", function (d) { // set the color of each country
+          d.total = background_map_data.get(d.id) || 0;
+          return color_scale(d.total);
+        });
+    }
 
 </script>
