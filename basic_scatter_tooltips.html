@@ -82,6 +82,41 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     .domain(["setosa", "versicolor", "virginica" ])
     .range([ "#F8766D", "#00BA38", "#619CFF"]);
 
+  // add tooltip div, define general features
+  // opacity set to zero; we don't see it by default
+  let tooltip = d3.select("#graph_div")
+    .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "1px")
+      .style("border-radius", "5px")
+      .style("padding", "10px");
+
+  // make this tooltip visible when hover over point
+  let mouseover = function(d) {
+    tooltip
+      .style("opacity", 1)
+  }
+
+  // set text, position of tooltip based on datapoint (d)
+  let mousemove = function(d) {
+    console.log(tooltip);
+    tooltip
+      .html("The exact value of<br>the Ground Living area is: " + d.GrLivArea)
+      .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+      .style("top", (d3.mouse(this)[1]) + "px");
+  }
+
+  // make invisible when leave a point
+  let mouseleave = function(d) {
+    tooltip
+      .transition()
+        .duration(200)
+      .style("opacity", 0)
+  }
+
   // binding data
   let data_points = graph_elems
     .selectAll("data_points")
@@ -95,6 +130,9 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
       .style("opacity", 0.3)
       .style("stroke", "white")
       .attr("class", "data_point")
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave);
 
 });
 
