@@ -35,9 +35,9 @@ let map_projection = d3.geoNaturalEarth()
 d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(map_data){
 
     // draw the map
-    my_map.append("g")
-      .selectAll("map_features")
-      .data(map_data.features)
+    let feature_group = my_map.append("g");
+    let features = feature_group.selectAll("map_features");
+    let data_points = features.data(map_data.features)
       .enter() // for each each data point
         .append("path")
           .attr("fill", "green")
