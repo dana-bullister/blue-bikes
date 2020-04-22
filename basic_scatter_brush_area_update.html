@@ -82,10 +82,10 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     let cx = x(data_point.GrLivArea);
     let cy = y(data_point.SalePrice);
 
-    let sx0 = selected_coordinates[0][0],
-        sy0 = selected_coordinates[0][1],
-        sx1 = selected_coordinates[1][0],
-        sy1 = selected_coordinates[1][1];
+    let sx0 = selected_coordinates[0][0] - margin.left,
+        sy0 = selected_coordinates[0][1] - margin.top,
+        sx1 = selected_coordinates[1][0] - margin.left,
+        sy1 = selected_coordinates[1][1] - margin.top;
 
     return cx >= sx0 && cx <= sx1 && cy >= sy0 && cy <= sy1
   }
