@@ -52,7 +52,8 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
       .translate([map_width / 2, map_height / 2])
     data_points
       .transition()
-        .duration(2000)
+        .delay(init_delay)
+        .duration(trans_duration)
       .attr("d", d3.geoPath()
           .projection(map_projection))
 
