@@ -73,7 +73,23 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
   // called on at end of brush stroke
   function updateChart() {
+    let selected_coordinates = d3.event.selection;
+    data_points.classed("selected", function(d) { return isBrushed(selected_coordinates, d)})
   }
+
+  // returned a boolean of whether a given data point is selected in a brush
+  function isBrushed(selected_coordinates, data_point) {
+    let cx = x(data_point.GrLivArea);
+    let cy = y(data_point.SalePrice);
+
+    let sx0 = selected_coordinates[0][0],
+        sy0 = selected_coordinates[0][1],
+        sx1 = selected_coordinates[1][0],
+        sy1 = selected_coordinates[1][1];
+
+    return cx >= sx0 && cx <= sx1 && cy >= sy0 && cy <= sy1
+  }
+
   // add brush area
   graph_obj
     .call(d3.brush()
