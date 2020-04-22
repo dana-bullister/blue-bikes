@@ -62,6 +62,22 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
       .attr("fill", "#69b3a2")
       .attr("r", 1.5);
 
+    // update x axis
+    x.domain([0, 4000]);
+
+    graph_obj.select("#x_axis")
+      .transition()
+        .duration(2000)
+      .call(d3.axisBottom(x));
+
+    // update data points
+    data_points
+      .transition()
+        .delay(function(d,i){return(i*3)})
+        .duration(2000)
+      .attr("cx", function (d) { return x(d.GrLivArea); } )
+      .attr("cy", function (d) { return y(d.SalePrice); } )
+
 });
 
 </script>
