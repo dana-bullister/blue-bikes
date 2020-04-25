@@ -35,14 +35,17 @@
       apiKey: 'default_public'
     })
 
+    const source = new carto.source.Dataset('world_population_2015');
     const viz = new carto.Viz(`
-      width: 4
-      strokeWidth: 0.5
-      strokeColor: white
-      color: fuchsia
-    `);
-    const source = new carto.source.Dataset('world_ports')
+         @country_name: $country_name
+         @pop_2015: $pop_2015
+
+         width: sqrt($pop_2015)/200
+         color: opacity(BlueViolet, 0.5)
+         strokeColor: opacity(BlueViolet, 0.8)
+     `);
     const layer = new carto.Layer('layer', source, viz);
+
     layer.addTo(map);
 
     // Define pop-up
