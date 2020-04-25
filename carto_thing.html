@@ -33,7 +33,12 @@
       apiKey: 'default_public'
     })
 
-    const viz = new carto.Viz();
+    const viz = new carto.Viz(`
+      width: 4
+      strokeWidth: 0.5
+      strokeColor: black
+      color: rgb(10,185,107)
+    `);
     const source = new carto.source.Dataset('world_ports')
     const layer = new carto.Layer('layer', source, viz);
     layer.addTo(map);
