@@ -1,96 +1,80 @@
 <!DOCTYPE html>
-<!-- playing with basic functionality of d3 including margins, data binding, basic scatter plots, scales, transitions -->
+<meta charset="utf-8">
 
-<div id="graph_div"></div>
-
+<!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
 <script>
-  let margin = {
+  // set the dimensions and margins of the graph
+  var margin = {
       top: 10,
       right: 30,
       bottom: 30,
-      left: 60
+      left: 50
     },
-    container_width = 460,
-    container_height = 400,
-    graph_width = container_width - margin.left - margin.right,
-    graph_height = container_height - margin.top - margin.bottom;
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-  let graph_div = d3.select("#graph_div")
-    .attr("id", "graph_div")
-  let graph_obj = graph_div
+  // append the svg object to the body of the page
+  var svg = d3.select("#my_dataviz")
     .append("svg")
-    .attr("id", "graph_obj")
-    .attr("width", container_width)
-    .attr("height", container_height)
-    .attr("style", "background: lightgrey");
-  let graph_elems = graph_obj
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
     .append("g")
-    .attr("id", "graph_elems")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform",
+      "translate(" + margin.left + "," + margin.top + ")");
 
-  // read data
-  d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(sample_data) {
+  //Read the data
+  d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
 
-    // add x axis
-    let x = d3.scaleLinear()
-      .domain([0, 0])
-      .range([0, graph_width]);
+    // When reading the csv, I must format variables:
+    function(d) {
+      return {
+        date: d3.timeParse("%Y-%m-%d")(d.date),
+        value: d.value
+      }
+    },
 
-    let x_axis = graph_elems
-      .append('g')
-      .attr("id", "x_axis")
-      .attr("transform", "translate(0," + graph_height + ")")
-      .call(d3.axisBottom(x));
+    // Now I can use this dataset:
+    function(data) {
 
-    // add y axis
-    let y = d3.scaleLinear()
-      .domain([0, 500000])
-      .range([graph_height, 0]);
+      // Add X axis --> it is a date format
+      var x = d3.scaleTime()
+        .domain(d3.extent(data, function(d) {
+          return d.date;
+        }))
+        .range([0, width]);
+      svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
 
-    let y_axis = graph_elems
-      .append('g')
-      .attr("id", "y_axis")
-      .call(d3.axisLeft(y));
+      // Add Y axis
+      var y = d3.scaleLinear()
+        .domain([0, d3.max(data, function(d) {
+          return +d.value;
+        })])
+        .range([height, 0]);
+      svg.append("g")
+        .call(d3.axisLeft(y));
 
-    // binding data
-    let data_points = graph_elems
-      .selectAll("data_points")
-      .data(sample_data)
-      .enter()
-      .append("circle")
-      .attr("cx", function(d) {
-        return x(d.GrLivArea)
-      })
-      .attr("cy", function(d) {
-        return y(d.SalePrice)
-      })
-      .attr("class", "data_point")
-      .attr("fill", "#69b3a2")
-      .attr("r", 1.5);
+      // Add the area
+      svg.append("path")
+        .datum(data)
+        .attr("fill", "#cce5df")
+        .attr("stroke", "#69b3a2")
+        .attr("stroke-width", 1.5)
+        .attr("d", d3.area()
+          .x(function(d) {
+            return x(d.date)
+          })
+          .y0(y(0))
+          .y1(function(d) {
+            return y(d.value)
+          })
+        )
 
-    // update x axis
-    x.domain([0, 4000]);
-
-    graph_obj.select("#x_axis")
-      .transition()
-      .duration(2000)
-      .call(d3.axisBottom(x));
-
-    // update data points
-    data_points
-      .transition()
-      .delay(function(d, i) {
-        return (i * 3)
-      })
-      .duration(2000)
-      .attr("cx", function(d) {
-        return x(d.GrLivArea);
-      })
-      .attr("cy", function(d) {
-        return y(d.SalePrice);
-      })
-
-  });
+    })
 </script>
