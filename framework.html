@@ -76,8 +76,8 @@
       .attr("height", height);
 
     queue()
-      .defer(d3.json, "/_assets/data/us_counties_2008.json")
-      .defer(d3.tsv, "/_assets/data/us_unemployment_2008.tsv", function(d) {
+      .defer(d3.json, "https://raw.githubusercontent.com/python-visualization/folium/master/tests/us-counties.json")
+      .defer(d3.tsv, "https://raw.githubusercontent.com/civic-data-design-lab/16_11.S947/master/week11/data/us_unemployment_2008.tsv", function(d) {
         rateById.set(d.id, +d.rate);
       })
       .await(ready);
