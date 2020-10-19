@@ -88,11 +88,11 @@
       svg.append("g")
         .attr("class", "counties")
         .selectAll("path")
-        .data(json.feature(us, us.features)
-          .enter().append("path")
-          .attr("class", function(d) {
-            return quantize(rateById.get(d.id));
-          }))
+        .data(topojson.feature(us, us.objects.counties).features)
+        .enter().append("path")
+        .attr("class", function(d) {
+          return quantize(rateById.get(d.id));
+        })
         .attr("d", path);
 
       svg.append("path")
