@@ -10,9 +10,9 @@
 <body>
   <!-- graph area -->
 
-  <div id="graph_div"></div>
 
 
+  <div id="chart_area"></div>
   <script>
     let margin = {
         top: 10,
@@ -25,9 +25,9 @@
       graph_width = container_width - margin.left - margin.right,
       graph_height = container_height - margin.top - margin.bottom;
 
-    let graph_div = d3.select("#graph_div")
-      .attr("id", "graph_div")
-    let graph_obj = graph_div
+    let chart_area = d3.select("#chart_area")
+      .attr("id", "chart_area")
+    let graph_obj = chart_area
       .append("svg")
       .attr("id", "graph_obj")
       .attr("width", container_width)
