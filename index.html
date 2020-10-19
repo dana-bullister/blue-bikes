@@ -42,7 +42,7 @@
 
       // add x axis
       let x = d3.scaleLinear()
-        .domain([0, 0])
+        .domain([0, 0]) // start with all points collapsed on the left axis (they will animate to the correct location upon load)
         .range([0, graph_width]);
 
       let x_axis = graph_elems
@@ -77,8 +77,8 @@
         .attr("fill", "#69b3a2")
         .attr("r", 1.5);
 
-      // update x axis
-      x.domain([0, 4000]);
+      // animate data points to travel to their x-coordinate location from the left
+      x.domain([0, 4000]); // by first adjusting the domain of the x-axis
 
       chart_background.select("#x_axis")
         .transition()
