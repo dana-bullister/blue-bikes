@@ -99,10 +99,10 @@
         .enter()
         .append("circle")
         .attr("cx", function(d) {
-          return x(d.tripDuration)
+          return x(d.tripStartTime)
         })
         .attr("cy", function(d) {
-          return y(d.tripStartTime)
+          return y(d.tripDuration)
         })
         .attr("class", "data_point")
         .attr("fill", "rgb(63,72,204)")
@@ -124,10 +124,10 @@
         })
         .duration(2000)
         .attr("cx", function(d) {
-          return x(d.tripDuration);
+          return x(d.tripStartTime);
         })
         .attr("cy", function(d) {
-          return y(d.tripStartTime);
+          return y(d.tripDuration);
         })
 
     });
