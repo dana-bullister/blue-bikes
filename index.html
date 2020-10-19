@@ -13,6 +13,7 @@
   <div id="chart_area"></div>
 
   <script>
+    // set padding and spacing
     let chart_area_padding = {
         top: 70,
         right: 30,
@@ -34,6 +35,7 @@
     let chart_area = d3.select("#chart_area")
       .attr("id", "chart_area")
 
+    // add chart background
     let chart_background = chart_area
       .append("svg")
       .attr("id", "chart_background")
@@ -41,7 +43,7 @@
       .attr("height", chart_area_height)
       .attr("style", "background: lightgrey");
 
-    // chart title
+    // add chart title
     chart_background.append("text")
       .attr("text-anchor", "middle")
       .attr("x", (graph_width / 2) + chart_area_padding.left)
@@ -63,6 +65,7 @@
       .attr("x", -chart_area_padding.top - graph_height / 2)
       .text("Trip Duration (In Minutes)")
 
+    // add  group that will contain chart elements
     let graph_elems = chart_background
       .append("g")
       .attr("id", "graph_elems")
