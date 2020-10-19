@@ -40,6 +40,13 @@
       .attr("height", chart_area_height)
       .attr("style", "background: lightgrey");
 
+    // chart title
+    chart_background.append("text")
+      .attr("text-anchor", "middle")
+      .attr("x", (graph_width / 2) + chart_area_padding.left)
+      .attr("y", chart_area_padding.top / 2)
+      .text("Bluebike Trip Duration By Time Of Day");
+
     // add x-axis label
     chart_background.append("text")
       .attr("text-anchor", "middle")
