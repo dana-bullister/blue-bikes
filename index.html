@@ -41,6 +41,14 @@
       .attr("y", graph_height + chart_area_padding.top + 39)
       .text("Trip Start Time");
 
+    // add y-axis label
+    chart_background.append("text")
+      .attr("text-anchor", "middle")
+      .attr("transform", "rotate(-90)")
+      .attr("y", chart_area_padding.left / 3.7)
+      .attr("x", -chart_area_padding.top - graph_height / 2)
+      .text("Trip Duration (In Minutes)")
+
     let graph_elems = chart_background
       .append("g")
       .attr("id", "graph_elems")
