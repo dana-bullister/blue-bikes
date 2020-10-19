@@ -15,9 +15,9 @@
   <script>
     let chart_area_padding = {
         top: 70,
-        right: 50,
-        bottom: 50,
-        left: 55
+        right: 30,
+        bottom: 60,
+        left: 65
       },
 
       chart_area_width = 460,
@@ -52,14 +52,14 @@
     chart_background.append("text")
       .attr("text-anchor", "middle")
       .attr("x", (graph_width / 2) + chart_area_padding.left)
-      .attr("y", graph_height + chart_area_padding.top + 39)
+      .attr("y", graph_height + chart_area_padding.top + 43)
       .text("Trip Start Time");
 
     // add y-axis label
     chart_background.append("text")
       .attr("text-anchor", "middle")
       .attr("transform", "rotate(-90)")
-      .attr("y", chart_area_padding.left / 2.5)
+      .attr("y", chart_area_padding.left / 2 - 5)
       .attr("x", -chart_area_padding.top - graph_height / 2)
       .text("Trip Duration (In Minutes)")
 
