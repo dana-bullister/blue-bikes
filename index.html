@@ -33,6 +33,14 @@
       .attr("width", chart_area_width)
       .attr("height", chart_area_height)
       .attr("style", "background: lightgrey");
+
+    // add x axis label
+    chart_background.append("text")
+      .attr("text-anchor", "middle")
+      .attr("x", (graph_width / 2) + chart_area_padding.left)
+      .attr("y", graph_height + chart_area_padding.top + 39)
+      .text("Trip Start Time");
+
     let graph_elems = chart_background
       .append("g")
       .attr("id", "graph_elems")
