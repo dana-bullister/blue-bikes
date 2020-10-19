@@ -68,10 +68,10 @@
         .enter()
         .append("circle")
         .attr("cx", function(d) {
-          return x(d.GrLivArea)
+          return x(d.tripDuration)
         })
         .attr("cy", function(d) {
-          return y(d.SalePrice)
+          return y(d.tripStartTime)
         })
         .attr("class", "data_point")
         .attr("fill", "rgb(63,72,204)")
@@ -93,10 +93,10 @@
         })
         .duration(2000)
         .attr("cx", function(d) {
-          return x(d.GrLivArea);
+          return x(d.tripDuration);
         })
         .attr("cy", function(d) {
-          return y(d.SalePrice);
+          return y(d.tripStartTime);
         })
 
     });
