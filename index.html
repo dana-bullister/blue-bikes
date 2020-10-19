@@ -24,6 +24,12 @@
       graph_width = chart_area_width - chart_area_padding.left - chart_area_padding.right,
       graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
 
+    // set parameters for the maximum and minimum data points to be displayed
+    let x_val_min = 0,
+      x_val_max = 4000,
+      y_val_min = 0,
+      y_val_max = 500000;
+
     let chart_area = d3.select("#chart_area")
       .attr("id", "chart_area")
 
@@ -70,7 +76,7 @@
 
       // add y axis
       let y = d3.scaleLinear()
-        .domain([0, 500000])
+        .domain([0, y_val_max])
         .range([graph_height, 0]);
 
       let y_axis = graph_elems
@@ -95,7 +101,7 @@
         .attr("r", 1);
 
       // animate data points to travel to their x-coordinate location from the left
-      x.domain([0, 4000]); // by first adjusting the domain of the x-axis
+      x.domain([0, x_val_max]); // by first adjusting the domain of the x-axis
 
       chart_background.select("#x_axis")
         .transition()
