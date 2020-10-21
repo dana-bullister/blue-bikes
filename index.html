@@ -95,6 +95,15 @@
         .attr("id", "y_axis")
         .call(d3.axisLeft(y));
 
+      // filter the data to ensure none go outside the ranges of the axes
+      function filterToWithinAxesRange(data) {
+        return data.filter(function(point) {
+          return point.tripStartTime >= x_val_min && point.tripStartTime <= x_val_max && point.tripDuration >= y_val_min && point.tripDuration <= y_val_max;
+        });
+      }
+
+      bike_data = filterToWithinAxesRange(bike_data);
+
       // binding data
       let data_points = graph_elems
         .selectAll("data_points")
