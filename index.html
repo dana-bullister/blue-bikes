@@ -99,11 +99,16 @@
         .attr("id", "y_axis")
         .call(d3.axisLeft(y));
 
+      // parse all dates in data set as the appropriate date objects
+      function parseDates(rowOfData) {
+        rowOfData.tripStartTime = parseDatetime(rowOfData.tripStartTime);
+      }
+      bike_data.forEach(parseDates);
+
       // filter the data to ensure none go outside the ranges of the axes
       function filterToWithinAxesRange(data) {
         return data.filter(function(point) {
-          let tripStartTime = parseDatetime(point.tripStartTime);
-          return tripStartTime >= x_val_min && tripStartTime <= x_val_max && point.tripDuration >= y_val_min && point.tripDuration <= y_val_max;
+          return point.tripStartTime >= x_val_min && point.tripStartTime <= x_val_max && point.tripDuration >= y_val_min && point.tripDuration <= y_val_max;
         });
       }
 
@@ -116,7 +121,7 @@
         .enter()
         .append("circle")
         .attr("cx", function(d) {
-          return x(parseDatetime(d.tripStartTime))
+          return x(d.tripStartTime)
         })
         .attr("cy", function(d) {
           return y(d.tripDuration)
@@ -141,7 +146,7 @@
         })
         .duration(2000)
         .attr("cx", function(d) {
-          return x(parseDatetime(d.tripStartTime));
+          return x(d.tripStartTime);
         })
         .attr("cy", function(d) {
           return y(d.tripDuration);
