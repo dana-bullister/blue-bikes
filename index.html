@@ -89,7 +89,12 @@
         .attr("transform", "translate(0," + graph_height + ")")
         .call(d3.axisBottom(x)
           .ticks(5)
-          .tickFormat(d3.timeFormat("%I:%M%p")));
+          .tickFormat(d3.timeFormat("%I:%M%p")))
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
 
       // add y axis
       let y = d3.scaleLinear()
