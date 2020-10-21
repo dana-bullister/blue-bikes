@@ -104,7 +104,7 @@
         .attr("transform", "translate(0," + graph_height + ")")
         .call(d3.axisBottom(x)
           .tickValues(x_axis_ticks)
-          .tickFormat(d3.timeFormat("%I:%M%p")))
+          .tickFormat(d3.timeFormat("%-I %p")))
         .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
