@@ -76,7 +76,7 @@
 
       // add x axis
       let x = d3.scaleLinear()
-        .domain([0, 0]) // start with all points collapsed on the left axis (they will animate to the correct location upon load)
+        .domain([0, x_val_max])
         .range([0, graph_width]);
 
       let x_axis = graph_elems
@@ -87,7 +87,7 @@
 
       // add y axis
       let y = d3.scaleLinear()
-        .domain([0, y_val_max])
+        .domain([0, 0]) // start with all points collapsed on the bottom axis (they will animate to the correct location upon load)
         .range([graph_height, 0]);
 
       let y_axis = graph_elems
@@ -111,13 +111,13 @@
         .attr("fill", "rgb(63,72,204)")
         .attr("r", 1);
 
-      // animate data points to travel to their x-coordinate location from the left
-      x.domain([0, x_val_max]); // by first adjusting the domain of the x-axis
+      // animate data points to travel to their y-coordinate location from the bottom
+      y.domain([0, y_val_max]); // by first adjusting the domain of the y-axis
 
-      chart_background.select("#x_axis")
+      chart_background.select("#y_axis")
         .transition()
         .duration(500)
-        .call(d3.axisBottom(x));
+        .call(d3.axisLeft(y));
 
       // transition the points to their correct location
       data_points
