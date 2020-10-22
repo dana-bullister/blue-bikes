@@ -44,8 +44,8 @@
         graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
 
       // set min and max values for axes
-      let x_val_min = parseDatetime('2020-09-01 0:00:00'),
-        x_val_max = parseDatetime('2020-09-01 23:59:59'),
+      let x_val_min = parseDatetime(bikeDataDateStr + ' 0:00:00'),
+        x_val_max = parseDatetime(bikeDataDateStr + ' 23:59:59'),
         y_val_min = 0,
         y_val_max = 120;
 
@@ -73,7 +73,7 @@
         .attr("x", (graph_width / 2) + chart_area_padding.left)
         .attr("y", 50)
         .attr("font-size", 12)
-        .text("(All  Rides in Boston, Cambridge, Brookline, Somerville, Sept 1, 2020)");
+        .text("(All  Rides in Boston, Cambridge, Brookline, Somerville, " + formatDatetime(bikeDataDate));
 
       // add x-axis label
       chart_background.append("text")
@@ -106,17 +106,17 @@
 
         // specify where want x-axis tick marks placed
         let x_axis_ticks = [
-          new Date('2020-09-01 02:00:00'),
-          new Date('2020-09-01 04:00:00'),
-          new Date('2020-09-01 06:00:00'),
-          new Date('2020-09-01 08:00:00'),
-          new Date('2020-09-01 10:00:00'),
-          new Date('2020-09-01 12:00:00'),
-          new Date('2020-09-01 14:00:00'),
-          new Date('2020-09-01 16:00:00'),
-          new Date('2020-09-01 18:00:00'),
-          new Date('2020-09-01 20:00:00'),
-          new Date('2020-09-01 22:00:00')
+          new Date(bikeDataDateStr + ' 02:00:00'),
+          new Date(bikeDataDateStr + ' 04:00:00'),
+          new Date(bikeDataDateStr + ' 06:00:00'),
+          new Date(bikeDataDateStr + ' 08:00:00'),
+          new Date(bikeDataDateStr + ' 10:00:00'),
+          new Date(bikeDataDateStr + ' 12:00:00'),
+          new Date(bikeDataDateStr + ' 14:00:00'),
+          new Date(bikeDataDateStr + ' 16:00:00'),
+          new Date(bikeDataDateStr + ' 18:00:00'),
+          new Date(bikeDataDateStr + ' 20:00:00'),
+          new Date(bikeDataDateStr + ' 22:00:00')
         ];
 
         let x_axis = graph_elems
