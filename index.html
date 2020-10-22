@@ -25,6 +25,11 @@
       // cleanly readable as a date (specifically, "June 30, 2015")
       let formatDatetime = d3.timeFormat("%B %d, %Y");
 
+      // infer the date the bike data is describing based on the file name and
+      // store this as a set of useful variables
+      let bikeDataDateStr = csvFileName.substring(13, 23);
+      let bikeDataDate = parseDatetime(bikeDataDateStr + ' 00:00:00');
+
       // set padding and spacing
       let chart_area_padding = {
           top: 70,
