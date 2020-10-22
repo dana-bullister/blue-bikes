@@ -13,176 +13,185 @@
   <div id="chart_area"></div>
 
   <script>
-    // set padding and spacing
-    let chart_area_padding = {
-        top: 70,
-        right: 30,
-        bottom: 70,
-        left: 65
-      },
+    // function to generate a scatter plot, given the name of an accessible csv
+    // file with appropriately formatted data
+    function generateScatter(csvFileName) {
 
-      chart_area_width = 460,
-      chart_area_height = 400,
-      graph_width = chart_area_width - chart_area_padding.left - chart_area_padding.right,
-      graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
+      // set padding and spacing
+      let chart_area_padding = {
+          top: 70,
+          right: 30,
+          bottom: 70,
+          left: 65
+        },
 
-    // define a parser for parsing csv columns representing datetimes (but
-    // formatted as strings) as the appropriate date objects
-    let parseDatetime = d3.timeParse("%Y-%m-%d %H:%M:%S");
+        chart_area_width = 460,
+        chart_area_height = 400,
+        graph_width = chart_area_width - chart_area_padding.left - chart_area_padding.right,
+        graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
 
-    // set min and max values for axes
-    let x_val_min = parseDatetime('2020-09-01 0:00:00'),
-      x_val_max = parseDatetime('2020-09-01 23:59:59'),
-      y_val_min = 0,
-      y_val_max = 120;
+      // define a parser for parsing csv columns representing datetimes (but
+      // formatted as strings) as the appropriate date objects
+      let parseDatetime = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
-    let chart_area = d3.select("#chart_area")
-      .attr("id", "chart_area")
+      // set min and max values for axes
+      let x_val_min = parseDatetime('2020-09-01 0:00:00'),
+        x_val_max = parseDatetime('2020-09-01 23:59:59'),
+        y_val_min = 0,
+        y_val_max = 120;
 
-    // add chart background
-    let chart_background = chart_area
-      .append("svg")
-      .attr("id", "chart_background")
-      .attr("width", chart_area_width)
-      .attr("height", chart_area_height)
-      .attr("style", "background: lightgrey");
+      let chart_area = d3.select("#chart_area")
+        .attr("id", "chart_area")
 
-    // add chart title
-    chart_background.append("text")
-      .attr("text-anchor", "middle")
-      .attr("x", (graph_width / 2) + chart_area_padding.left)
-      .attr("y", 30)
-      .text("Bluebike Trip Duration By Time Of Day");
+      // add chart background
+      let chart_background = chart_area
+        .append("svg")
+        .attr("id", "chart_background")
+        .attr("width", chart_area_width)
+        .attr("height", chart_area_height)
+        .attr("style", "background: lightgrey");
 
-    // add chart subtitle
-    chart_background.append("text")
-      .attr("text-anchor", "middle")
-      .attr("x", (graph_width / 2) + chart_area_padding.left)
-      .attr("y", 50)
-      .attr("font-size", 12)
-      .text("(All  Rides in Boston, Cambridge, Brookline, Somerville, Sept 1, 2020)");
+      // add chart title
+      chart_background.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", (graph_width / 2) + chart_area_padding.left)
+        .attr("y", 30)
+        .text("Bluebike Trip Duration By Time Of Day");
 
-    // add x-axis label
-    chart_background.append("text")
-      .attr("text-anchor", "middle")
-      .attr("x", (graph_width / 2) + chart_area_padding.left)
-      .attr("y", graph_height + chart_area_padding.top + 56)
-      .text("Trip Start Time");
+      // add chart subtitle
+      chart_background.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", (graph_width / 2) + chart_area_padding.left)
+        .attr("y", 50)
+        .attr("font-size", 12)
+        .text("(All  Rides in Boston, Cambridge, Brookline, Somerville, Sept 1, 2020)");
 
-    // add y-axis label
-    chart_background.append("text")
-      .attr("text-anchor", "middle")
-      .attr("transform", "rotate(-90)")
-      .attr("y", chart_area_padding.left / 2 - 5)
-      .attr("x", -chart_area_padding.top - graph_height / 2)
-      .text("Trip Duration (Minutes)")
+      // add x-axis label
+      chart_background.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", (graph_width / 2) + chart_area_padding.left)
+        .attr("y", graph_height + chart_area_padding.top + 56)
+        .text("Trip Start Time");
 
-    // add  group that will contain chart elements
-    let graph_elems = chart_background
-      .append("g")
-      .attr("id", "graph_elems")
-      .attr("transform", "translate(" + chart_area_padding.left + "," + chart_area_padding.top + ")");
+      // add y-axis label
+      chart_background.append("text")
+        .attr("text-anchor", "middle")
+        .attr("transform", "rotate(-90)")
+        .attr("y", chart_area_padding.left / 2 - 5)
+        .attr("x", -chart_area_padding.top - graph_height / 2)
+        .text("Trip Duration (Minutes)")
 
-    // read data
-    d3.csv("bluebikedata_2020-09-01.csv", function(bike_data) {
+      // add  group that will contain chart elements
+      let graph_elems = chart_background
+        .append("g")
+        .attr("id", "graph_elems")
+        .attr("transform", "translate(" + chart_area_padding.left + "," + chart_area_padding.top + ")");
 
-      // add x axis
-      let x = d3.scaleLinear()
-        .domain([x_val_min, x_val_max])
-        .range([0, graph_width]);
+      // read data
+      d3.csv(csvFileName, function(bike_data) {
 
-      // specify where want x-axis tick marks placed
-      let x_axis_ticks = [
-        new Date('2020-09-01 02:00:00'),
-        new Date('2020-09-01 04:00:00'),
-        new Date('2020-09-01 06:00:00'),
-        new Date('2020-09-01 08:00:00'),
-        new Date('2020-09-01 10:00:00'),
-        new Date('2020-09-01 12:00:00'),
-        new Date('2020-09-01 14:00:00'),
-        new Date('2020-09-01 16:00:00'),
-        new Date('2020-09-01 18:00:00'),
-        new Date('2020-09-01 20:00:00'),
-        new Date('2020-09-01 22:00:00')
-      ];
+        // add x axis
+        let x = d3.scaleLinear()
+          .domain([x_val_min, x_val_max])
+          .range([0, graph_width]);
 
-      let x_axis = graph_elems
-        .append('g')
-        .attr("id", "x_axis")
-        .attr("transform", "translate(0," + graph_height + ")")
-        .call(d3.axisBottom(x)
-          .tickValues(x_axis_ticks)
-          .tickFormat(d3.timeFormat("%-I %p")))
-        .selectAll("text")
-        .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", ".15em")
-        .attr("transform", "rotate(-65)");
+        // specify where want x-axis tick marks placed
+        let x_axis_ticks = [
+          new Date('2020-09-01 02:00:00'),
+          new Date('2020-09-01 04:00:00'),
+          new Date('2020-09-01 06:00:00'),
+          new Date('2020-09-01 08:00:00'),
+          new Date('2020-09-01 10:00:00'),
+          new Date('2020-09-01 12:00:00'),
+          new Date('2020-09-01 14:00:00'),
+          new Date('2020-09-01 16:00:00'),
+          new Date('2020-09-01 18:00:00'),
+          new Date('2020-09-01 20:00:00'),
+          new Date('2020-09-01 22:00:00')
+        ];
 
-      // add y axis
-      let y = d3.scaleLinear()
-        .domain([y_val_min, y_val_min]) // start with all points collapsed on the bottom axis (they will animate to the correct location upon load)
-        .range([graph_height, 0]);
+        let x_axis = graph_elems
+          .append('g')
+          .attr("id", "x_axis")
+          .attr("transform", "translate(0," + graph_height + ")")
+          .call(d3.axisBottom(x)
+            .tickValues(x_axis_ticks)
+            .tickFormat(d3.timeFormat("%-I %p")))
+          .selectAll("text")
+          .style("text-anchor", "end")
+          .attr("dx", "-.8em")
+          .attr("dy", ".15em")
+          .attr("transform", "rotate(-65)");
 
-      let y_axis = graph_elems
-        .append('g')
-        .attr("id", "y_axis")
-        .call(d3.axisLeft(y));
+        // add y axis
+        let y = d3.scaleLinear()
+          .domain([y_val_min, y_val_min]) // start with all points collapsed on the bottom axis (they will animate to the correct location upon load)
+          .range([graph_height, 0]);
 
-      // parse all dates in data set as the appropriate date objects
-      function parseDates(rowOfData) {
-        rowOfData.tripStartTime = parseDatetime(rowOfData.tripStartTime);
-      }
-      bike_data.forEach(parseDates);
+        let y_axis = graph_elems
+          .append('g')
+          .attr("id", "y_axis")
+          .call(d3.axisLeft(y));
 
-      // filter the data to ensure none go outside the ranges of the axes
-      function filterToWithinAxesRange(data) {
-        return data.filter(function(point) {
-          return point.tripStartTime >= x_val_min && point.tripStartTime <= x_val_max && point.tripDuration >= y_val_min && point.tripDuration <= y_val_max;
-        });
-      }
+        // parse all dates in data set as the appropriate date objects
+        function parseDates(rowOfData) {
+          rowOfData.tripStartTime = parseDatetime(rowOfData.tripStartTime);
+        }
+        bike_data.forEach(parseDates);
 
-      bike_data = filterToWithinAxesRange(bike_data);
+        // filter the data to ensure none go outside the ranges of the axes
+        function filterToWithinAxesRange(data) {
+          return data.filter(function(point) {
+            return point.tripStartTime >= x_val_min && point.tripStartTime <= x_val_max && point.tripDuration >= y_val_min && point.tripDuration <= y_val_max;
+          });
+        }
 
-      // binding data
-      let data_points = graph_elems
-        .selectAll("data_points")
-        .data(bike_data)
-        .enter()
-        .append("circle")
-        .attr("cx", function(d) {
-          return x(d.tripStartTime)
-        })
-        .attr("cy", function(d) {
-          return y(d.tripDuration)
-        })
-        .attr("class", "data_point")
-        .attr("fill", "rgb(63,72,204)")
-        .attr("r", 1);
+        bike_data = filterToWithinAxesRange(bike_data);
 
-      // animate data points to travel to their y-coordinate location from the bottom
-      y.domain([y_val_min, y_val_max]); // by first adjusting the domain of the y-axis
+        // binding data
+        let data_points = graph_elems
+          .selectAll("data_points")
+          .data(bike_data)
+          .enter()
+          .append("circle")
+          .attr("cx", function(d) {
+            return x(d.tripStartTime)
+          })
+          .attr("cy", function(d) {
+            return y(d.tripDuration)
+          })
+          .attr("class", "data_point")
+          .attr("fill", "rgb(63,72,204)")
+          .attr("r", 1);
 
-      chart_background.select("#y_axis")
-        .transition()
-        .duration(500)
-        .call(d3.axisLeft(y));
+        // animate data points to travel to their y-coordinate location from the bottom
+        y.domain([y_val_min, y_val_max]); // by first adjusting the domain of the y-axis
 
-      // transition the points to their correct location
-      data_points
-        .transition()
-        .delay(function(d, i) {
-          return (i)
-        })
-        .duration(2000)
-        .attr("cx", function(d) {
-          return x(d.tripStartTime);
-        })
-        .attr("cy", function(d) {
-          return y(d.tripDuration);
-        })
+        chart_background.select("#y_axis")
+          .transition()
+          .duration(500)
+          .call(d3.axisLeft(y));
 
-    });
+        // transition the points to their correct location
+        data_points
+          .transition()
+          .delay(function(d, i) {
+            return (i)
+          })
+          .duration(2000)
+          .attr("cx", function(d) {
+            return x(d.tripStartTime);
+          })
+          .attr("cy", function(d) {
+            return y(d.tripDuration);
+          })
+
+      });
+    }
+
+    // generate a scatter plot for each sample of blue bike data (corresponding
+    // to one day from each season)
+    generateScatter("bluebikedata_2020-09-01.csv");
   </script>
 </body>
 
