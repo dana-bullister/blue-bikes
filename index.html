@@ -21,6 +21,10 @@
       // formatted as strings) as the appropriate date objects
       let parseDatetime = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
+      // define a datetime formatter for formmatting a date object in a way that is
+      // cleanly readable as a date (specifically, "June 30, 2015")
+      let formatDatetime = d3.timeFormat("%B %d, %Y");
+
       // set padding and spacing
       let chart_area_padding = {
           top: 70,
