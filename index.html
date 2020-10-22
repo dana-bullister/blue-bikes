@@ -148,6 +148,12 @@
         }
         bike_data.forEach(parseDates);
 
+        // convert all values for tripDuration to minutes from seconds
+        function convertDurToMin(rowOfData) {
+          rowOfData.tripDuration = rowOfData.tripDuration / 60;
+        }
+        bike_data.forEach(convertDurToMin);
+
         // filter the data to ensure none go outside the ranges of the axes
         function filterToWithinAxesRange(data) {
           return data.filter(function(point) {
