@@ -17,6 +17,10 @@
     // file with appropriately formatted data
     function generateScatter(csvFileName) {
 
+      // define a parser for parsing csv columns representing datetimes (but
+      // formatted as strings) as the appropriate date objects
+      let parseDatetime = d3.timeParse("%Y-%m-%d %H:%M:%S");
+
       // set padding and spacing
       let chart_area_padding = {
           top: 70,
@@ -29,10 +33,6 @@
         chart_area_height = 400,
         graph_width = chart_area_width - chart_area_padding.left - chart_area_padding.right,
         graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
-
-      // define a parser for parsing csv columns representing datetimes (but
-      // formatted as strings) as the appropriate date objects
-      let parseDatetime = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
       // set min and max values for axes
       let x_val_min = parseDatetime('2020-09-01 0:00:00'),
