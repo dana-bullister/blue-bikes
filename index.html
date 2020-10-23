@@ -144,20 +144,20 @@
 
           // parse all dates in data set as the appropriate date objects
           function parseDates(rowOfData) {
-            rowOfData.tripStartTime = parseDatetime(rowOfData.tripStartTime);
+            rowOfData.starttime = parseDatetime(rowOfData.starttime);
           }
           bike_data.forEach(parseDates);
 
-          // convert all values for tripDuration to minutes from seconds
+          // convert all values for tripduration to minutes from seconds
           function convertDurToMin(rowOfData) {
-            rowOfData.tripDuration = rowOfData.tripDuration / 60;
+            rowOfData.tripduration = rowOfData.tripduration / 60;
           }
           bike_data.forEach(convertDurToMin);
 
           // filter the data to ensure none go outside the ranges of the axes
           function filterToWithinAxesRange(data) {
             return data.filter(function(point) {
-              return point.tripStartTime >= x_val_min && point.tripStartTime <= x_val_max && point.tripDuration >= y_val_min && point.tripDuration <= y_val_max;
+              return point.starttime >= x_val_min && point.starttime <= x_val_max && point.tripduration >= y_val_min && point.tripduration <= y_val_max;
             });
           }
 
@@ -170,10 +170,10 @@
             .enter()
             .append("circle")
             .attr("cx", function(d) {
-              return x(d.tripStartTime)
+              return x(d.starttime)
             })
             .attr("cy", function(d) {
-              return y(d.tripDuration)
+              return y(d.tripduration)
             })
             .attr("class", "data_point")
             .attr("fill", "rgb(63,72,204)")
@@ -196,10 +196,10 @@
             })
             .duration(2000)
             .attr("cx", function(d) {
-              return x(d.tripStartTime);
+              return x(d.starttime);
             })
             .attr("cy", function(d) {
-              return y(d.tripDuration);
+              return y(d.tripduration);
             })
 
         })
