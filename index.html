@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Blue Bikes</title>
-  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3.v6.js"></script>
 </head>
 
 <body>
@@ -97,111 +97,115 @@
         .attr("transform", "translate(" + chart_area_padding.left + "," + chart_area_padding.top + ")");
 
       // read data
-      d3.csv(csvFileName, function(bike_data) {
+      d3.csv(csvFileName).then((bike_data) => {
 
-        // add x axis
-        let x = d3.scaleLinear()
-          .domain([x_val_min, x_val_max])
-          .range([0, graph_width]);
+          // add x axis
+          let x = d3.scaleLinear()
+            .domain([x_val_min, x_val_max])
+            .range([0, graph_width]);
 
-        // specify where want x-axis tick marks placed
-        let x_axis_ticks = [
-          new Date(bikeDataDateStr + ' 02:00:00'),
-          new Date(bikeDataDateStr + ' 04:00:00'),
-          new Date(bikeDataDateStr + ' 06:00:00'),
-          new Date(bikeDataDateStr + ' 08:00:00'),
-          new Date(bikeDataDateStr + ' 10:00:00'),
-          new Date(bikeDataDateStr + ' 12:00:00'),
-          new Date(bikeDataDateStr + ' 14:00:00'),
-          new Date(bikeDataDateStr + ' 16:00:00'),
-          new Date(bikeDataDateStr + ' 18:00:00'),
-          new Date(bikeDataDateStr + ' 20:00:00'),
-          new Date(bikeDataDateStr + ' 22:00:00')
-        ];
+          // specify where want x-axis tick marks placed
+          let x_axis_ticks = [
+            new Date(bikeDataDateStr + ' 02:00:00'),
+            new Date(bikeDataDateStr + ' 04:00:00'),
+            new Date(bikeDataDateStr + ' 06:00:00'),
+            new Date(bikeDataDateStr + ' 08:00:00'),
+            new Date(bikeDataDateStr + ' 10:00:00'),
+            new Date(bikeDataDateStr + ' 12:00:00'),
+            new Date(bikeDataDateStr + ' 14:00:00'),
+            new Date(bikeDataDateStr + ' 16:00:00'),
+            new Date(bikeDataDateStr + ' 18:00:00'),
+            new Date(bikeDataDateStr + ' 20:00:00'),
+            new Date(bikeDataDateStr + ' 22:00:00')
+          ];
 
-        let x_axis = graph_elems
-          .append('g')
-          .attr("id", "x_axis")
-          .attr("transform", "translate(0," + graph_height + ")")
-          .call(d3.axisBottom(x)
-            .tickValues(x_axis_ticks)
-            .tickFormat(d3.timeFormat("%-I %p")))
-          .selectAll("text")
-          .style("text-anchor", "end")
-          .attr("dx", "-.8em")
-          .attr("dy", ".15em")
-          .attr("transform", "rotate(-65)");
+          let x_axis = graph_elems
+            .append('g')
+            .attr("id", "x_axis")
+            .attr("transform", "translate(0," + graph_height + ")")
+            .call(d3.axisBottom(x)
+              .tickValues(x_axis_ticks)
+              .tickFormat(d3.timeFormat("%-I %p")))
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
 
-        // add y axis
-        let y = d3.scaleLinear()
-          .domain([y_val_min, y_val_min]) // start with all points collapsed on the bottom axis (they will animate to the correct location upon load)
-          .range([graph_height, 0]);
+          // add y axis
+          let y = d3.scaleLinear()
+            .domain([y_val_min, y_val_max])
+            .range([graph_height, graph_height]); // start with all points collapsed on the bottom axis (they will animate to the correct location upon load)
 
-        let y_axis = graph_elems
-          .append('g')
-          .attr("id", "y_axis")
-          .call(d3.axisLeft(y));
+          let y_axis = graph_elems
+            .append('g')
+            .attr("id", "y_axis")
+            .call(d3.axisLeft(y));
 
-        // parse all dates in data set as the appropriate date objects
-        function parseDates(rowOfData) {
-          rowOfData.tripStartTime = parseDatetime(rowOfData.tripStartTime);
-        }
-        bike_data.forEach(parseDates);
+          // parse all dates in data set as the appropriate date objects
+          function parseDates(rowOfData) {
+            rowOfData.tripStartTime = parseDatetime(rowOfData.tripStartTime);
+          }
+          bike_data.forEach(parseDates);
 
-        // convert all values for tripDuration to minutes from seconds
-        function convertDurToMin(rowOfData) {
-          rowOfData.tripDuration = rowOfData.tripDuration / 60;
-        }
-        bike_data.forEach(convertDurToMin);
+          // convert all values for tripDuration to minutes from seconds
+          function convertDurToMin(rowOfData) {
+            rowOfData.tripDuration = rowOfData.tripDuration / 60;
+          }
+          bike_data.forEach(convertDurToMin);
 
-        // filter the data to ensure none go outside the ranges of the axes
-        function filterToWithinAxesRange(data) {
-          return data.filter(function(point) {
-            return point.tripStartTime >= x_val_min && point.tripStartTime <= x_val_max && point.tripDuration >= y_val_min && point.tripDuration <= y_val_max;
-          });
-        }
+          // filter the data to ensure none go outside the ranges of the axes
+          function filterToWithinAxesRange(data) {
+            return data.filter(function(point) {
+              return point.tripStartTime >= x_val_min && point.tripStartTime <= x_val_max && point.tripDuration >= y_val_min && point.tripDuration <= y_val_max;
+            });
+          }
 
-        bike_data = filterToWithinAxesRange(bike_data);
+          bike_data = filterToWithinAxesRange(bike_data);
 
-        // binding data
-        let data_points = graph_elems
-          .selectAll("data_points")
-          .data(bike_data)
-          .enter()
-          .append("circle")
-          .attr("cx", function(d) {
-            return x(d.tripStartTime)
-          })
-          .attr("cy", function(d) {
-            return y(d.tripDuration)
-          })
-          .attr("class", "data_point")
-          .attr("fill", "rgb(63,72,204)")
-          .attr("r", 1);
+          // binding data
+          let data_points = graph_elems
+            .selectAll("data_points")
+            .data(bike_data)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d) {
+              return x(d.tripStartTime)
+            })
+            .attr("cy", function(d) {
+              return y(d.tripDuration)
+            })
+            .attr("class", "data_point")
+            .attr("fill", "rgb(63,72,204)")
+            .attr("r", 1);
 
-        // animate data points to travel to their y-coordinate location from the bottom
-        y.domain([y_val_min, y_val_max]); // by first adjusting the domain of the y-axis
+          // animate data points to travel to their y-coordinate location from the bottom
+          // by first adjusting the range of the y-axis
+          y.range([graph_height, 0]);
 
-        chart_background.select("#y_axis")
-          .transition()
-          .duration(500)
-          .call(d3.axisLeft(y));
+          chart_background.select("#y_axis")
+            .transition()
+            .duration(500)
+            .call(d3.axisLeft(y));
 
-        // transition the points to their correct location
-        data_points
-          .transition()
-          .delay(function(d, i) {
-            return (i)
-          })
-          .duration(2000)
-          .attr("cx", function(d) {
-            return x(d.tripStartTime);
-          })
-          .attr("cy", function(d) {
-            return y(d.tripDuration);
-          })
+          // transition the points to their correct location
+          data_points
+            .transition()
+            .delay(function(d, i) {
+              return (i)
+            })
+            .duration(2000)
+            .attr("cx", function(d) {
+              return x(d.tripStartTime);
+            })
+            .attr("cy", function(d) {
+              return y(d.tripDuration);
+            })
 
-      });
+        })
+        .catch((error) => {
+          console.error("Error loading the data");
+        });
     }
 
     // generate a scatter plot for each sample of blue bike data (corresponding
