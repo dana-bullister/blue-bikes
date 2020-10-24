@@ -158,11 +158,11 @@
           // set their corresponding day as the first of the month (that way all
           // data points fall within same 24h period and constitute a 'typical
           // day')
-          function parseDates(rowOfData) {
+          function parseDatetimes(rowOfData) {
             rowOfData.starttime = parseDatetime(rowOfData.starttime);
             rowOfData.starttime.setDate(1);
           }
-          bike_data.forEach(parseDates);
+          bike_data.forEach(parseDatetimes);
 
           // convert all values for tripduration to minutes from seconds
           function convertDurToMin(rowOfData) {
