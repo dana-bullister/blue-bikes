@@ -67,13 +67,18 @@
       let main_chart_area = d3.select("#main_chart_area")
         .attr("id", "main_chart_area")
 
+      // add chart div
+      let chart = main_chart_area
+        .append("div")
+        .attr("id", "chart")
+
       // add chart background
-      let chart_background = main_chart_area
+      let chart_background = chart
         .append("svg")
         .attr("id", "chart_background")
+        .attr("style", "background: lightgrey")
         .attr("width", main_chart_area_width)
-        .attr("height", main_chart_area_height)
-        .attr("style", "background: lightgrey");
+        .attr("height", main_chart_area_height);
 
       // add chart title
       chart_background.append("text")
