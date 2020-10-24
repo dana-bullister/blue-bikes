@@ -55,7 +55,7 @@
       let chart_area = d3.select("#" + chartAreaID)
 
       // set padding and spacing
-      let topPadding, showMainTitle, showSubtitle1, subtitle2Padding, subtitle2FontSize, subtitle2Text;
+      let topPadding, showMainTitle, showSubtitle1, showAxesLabels, subtitle2Padding, subtitle2FontSize, subtitle2Text;
 
       if (size == "small") {
         topPadding = 82,
@@ -63,11 +63,13 @@
           showSubtitle1 = false,
           subtitle2Padding = 50,
           subtitle2FontSize = 40,
+          showAxesLabels = false,
           subtitle2Text = bikeDataMonthName;
       } else {
         topPadding = 90,
           showMainTitle = true,
           showSubtitle1 = true,
+          showAxesLabels = true,
           subtitle2Padding = 66,
           subtitle2FontSize = 11,
           subtitle2Text = "For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear;
@@ -127,20 +129,22 @@
         .attr("font-size", subtitle2FontSize)
         .text(subtitle2Text);
 
-      // add x-axis label
-      chart_background.append("text")
-        .attr("text-anchor", "middle")
-        .attr("x", (graph_width / 2) + chart_area_padding.left)
-        .attr("y", graph_height + chart_area_padding.top + 56)
-        .text("Trip Start Time");
+      if (showAxesLabels) {
+        // add x-axis label
+        chart_background.append("text")
+          .attr("text-anchor", "middle")
+          .attr("x", (graph_width / 2) + chart_area_padding.left)
+          .attr("y", graph_height + chart_area_padding.top + 56)
+          .text("Trip Start Time");
 
-      // add y-axis label
-      chart_background.append("text")
-        .attr("text-anchor", "middle")
-        .attr("transform", "rotate(-90)")
-        .attr("y", chart_area_padding.left / 2 - 5)
-        .attr("x", -chart_area_padding.top - graph_height / 2)
-        .text("Trip Duration (Minutes)")
+        // add y-axis label
+        chart_background.append("text")
+          .attr("text-anchor", "middle")
+          .attr("transform", "rotate(-90)")
+          .attr("y", chart_area_padding.left / 2 - 5)
+          .attr("x", -chart_area_padding.top - graph_height / 2)
+          .text("Trip Duration (Minutes)")
+      }
 
       // add  group that will contain chart elements
       let graph_elems = chart_background
