@@ -154,9 +154,13 @@
             .attr("id", "y_axis")
             .call(d3.axisLeft(y));
 
-          // parse all dates in data set as the appropriate date objects
+          // parse all dates in data set as the appropriate date objects and
+          // set their corresponding day as the first of the month (that way all
+          // data points fall within same 24h period and constitute a 'typical
+          // day')
           function parseDates(rowOfData) {
             rowOfData.starttime = parseDatetime(rowOfData.starttime);
+            rowOfData.starttime.setDate(1);
           }
           bike_data.forEach(parseDates);
 
