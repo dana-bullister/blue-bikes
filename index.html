@@ -55,7 +55,8 @@
       let chart_area = d3.select("#" + chartAreaID)
 
       // set padding and spacing
-      let topPadding, showMainTitle, showSubtitle1, showAxesLabels, subtitle2Padding, subtitle2FontSize, subtitle2Text;
+      let topPadding, showMainTitle, showSubtitle1, showAxesLabels,
+        subtitle2Padding, subtitle2FontSize, subtitle2Text, chart_area_padding;
 
       if (size == "small") {
         topPadding = 62,
@@ -64,7 +65,13 @@
           showAxesLabels = false,
           subtitle2Padding = 32,
           subtitle2FontSize = 30,
-          subtitle2Text = bikeDataMonthName;
+          subtitle2Text = bikeDataMonthName,
+          chart_area_padding = {
+            top: 48,
+            right: 11,
+            bottom: 25,
+            left: 29
+          };
       } else {
         topPadding = 90,
           showMainTitle = true,
@@ -72,19 +79,18 @@
           showAxesLabels = true,
           subtitle2Padding = 66,
           subtitle2FontSize = 11,
-          subtitle2Text = "For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear;
+          subtitle2Text = "For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear,
+          chart_area_padding = {
+            top: topPadding,
+            right: 30,
+            bottom: 70,
+            left: 65
+          };
       }
 
-      let chart_area_padding = {
-          top: topPadding,
-          right: 30,
-          bottom: 70,
-          left: 65
-        },
-
-        titleAdjustLeft = 10,
         chart_area_width = 460,
         chart_area_height = 400,
+      let titleAdjustLeft = 10,
         graph_width = chart_area_width - chart_area_padding.left - chart_area_padding.right,
         graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
 
