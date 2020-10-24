@@ -290,7 +290,7 @@
 
     // generate a scatter plot for each sample of blue bike data (corresponding
     // to one day from each season)
-    generateScatter("201909-bluebikes-tripdata.csv", "main_chart_area", "big", true);
+    //generateScatter("201909-bluebikes-tripdata.csv", "main_chart_area", "big", true);
 
     function genRestOfScatters() {
       generateScatter("201901-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
@@ -307,7 +307,7 @@
       generateScatter("201912-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
     }
 
-    setTimeout(genRestOfScatters, 11000);
+    setTimeout(genRestOfScatters, 0);
   </script>
 </body>
 
