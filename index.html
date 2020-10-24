@@ -16,8 +16,9 @@
 
   <script>
     // function to generate a scatter plot, given the name of an accessible csv
-    // file with appropriately formatted data as well as a boolean variable of
-    // whether the scatterplot should animate
+    // file with appropriately formatted data, the ID of an HTML element into
+    // which to plop the scatter plot, and a boolean value of whether the
+    // scatterplot should animate
     function generateScatter(csvFileName, chartAreaID, animate) {
 
       // define a parser for parsing csv columns representing datetimes (but
