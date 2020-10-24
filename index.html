@@ -25,10 +25,15 @@
       // cleanly readable as a date (specifically, "June 30, 2015")
       let formatDatetime = d3.timeFormat("%A, %B %d, %Y");
 
-      // infer the date the bike data is describing based on the file name and
+      // infer the month the bike data is describing based on the file name and
       // store this as a set of useful variables
-      let bikeDataDateStr = csvFileName.substring(13, 23);
-      let bikeDataDate = parseDatetime(bikeDataDateStr + ' 00:00:00');
+      let bikeDataMonth = csvFileName.substring(21, 23); // e.g., "03"
+      let bikeDataDatetimeStr = '2019-' + bikeDataMonth + '-01 00:00:00'; // set it to start of month
+      let bikeDataDate = parseDatetime(bikeDataDatetimeStr);
+      let monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      let bikeDataMonthName = monthNames[bikeDataDate.getMonth()];
 
       // set padding and spacing
       let chart_area_padding = {
@@ -44,8 +49,13 @@
         graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
 
       // set min and max values for axes
-      let x_val_min = parseDatetime(bikeDataDateStr + ' 0:00:00'),
-        x_val_max = parseDatetime(bikeDataDateStr + ' 23:59:59'),
+
+      let secondDay = new Date(); // variable for the second day of the month
+      secondDay.setTime(bikeDataDate);
+      secondDay.setDate(bikeDataDate.getDate() + 1);
+
+      let x_val_min = bikeDataDate,
+        x_val_max = secondDay,
         y_val_min = 0,
         y_val_max = 120;
 
@@ -73,7 +83,7 @@
         .attr("x", (graph_width / 2) + chart_area_padding.left)
         .attr("y", 50)
         .attr("font-size", 11)
-        .text("(All  Rides in Boston, Cambridge, Brookline, Somerville on " + formatDatetime(bikeDataDate));
+        .text("(All  Rides in Boston, Cambridge, Brookline, Somerville in " + bikeDataMonthName);
 
       // add x-axis label
       chart_background.append("text")
@@ -211,9 +221,9 @@
     // generate a scatter plot for each sample of blue bike data (corresponding
     // to one day from each season)
     generateScatter("bluebikedata_2020-09-01.csv");
-    generateScatter("bluebikedata_2019-12-03.csv");
-    generateScatter("bluebikedata_2020-03-03.csv");
-    generateScatter("bluebikedata_2020-06-02.csv");
+    //generateScatter("bluebikedata_2019-12-03.csv");
+    //generateScatter("bluebikedata_2020-03-03.csv");
+    //generateScatter("bluebikedata_2020-06-02.csv");
   </script>
 </body>
 
