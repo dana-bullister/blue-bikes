@@ -25,16 +25,10 @@
       // cleanly readable as a date (specifically, "June 30, 2015")
       let formatDatetime = d3.timeFormat("%A, %B %d, %Y");
 
-      // infer the month the bike data is describing based on the file name and
-      // store this as a datetime describing the first day of that month
-      let monthNames = ["January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"
-        ],
-        bikeDataMonthStr = csvFileName.substring(4, 6),
-        bikeDataDateStr = '2019-' + bikeDataMonthStr + '-01 00:00:00',
-        bikeDataDate = parseDatetime(bikeDataDateStr),
-        bikeDataDateEnd = bikeDataDate.setHours(23).setMinutes(59).setSeconds(59),
-        bikeDataMonthName = monthNames[bikeDataDate.getMonth()];
+      // infer the date the bike data is describing based on the file name and
+      // store this as a set of useful variables
+      let bikeDataDateStr = csvFileName.substring(13, 23);
+      let bikeDataDate = parseDatetime(bikeDataDateStr + ' 00:00:00');
 
       // set padding and spacing
       let chart_area_padding = {
@@ -50,8 +44,8 @@
         graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
 
       // set min and max values for axes
-      let x_val_min = bikeDataDate,
-        x_val_max = bikeDataDateEnd,
+      let x_val_min = parseDatetime(bikeDataDateStr + ' 0:00:00'),
+        x_val_max = parseDatetime(bikeDataDateStr + ' 23:59:59'),
         y_val_min = 0,
         y_val_max = 120;
 
@@ -79,7 +73,7 @@
         .attr("x", (graph_width / 2) + chart_area_padding.left)
         .attr("y", 50)
         .attr("font-size", 11)
-        .text("(All  Rides in Boston, Cambridge, Brookline, Somerville in " + bikeDataMonthName);
+        .text("(All  Rides in Boston, Cambridge, Brookline, Somerville on " + formatDatetime(bikeDataDate));
 
       // add x-axis label
       chart_background.append("text")
@@ -112,17 +106,17 @@
 
           // specify where want x-axis tick marks placed
           let x_axis_ticks = [
-            bikeDataDate.setHours(2),
-            bikeDataDate.setHours(4),
-            bikeDataDate.setHours(6),
-            bikeDataDate.setHours(8),
-            bikeDataDate.setHours(10),
-            bikeDataDate.setHours(12),
-            bikeDataDate.setHours(14),
-            bikeDataDate.setHours(16),
-            bikeDataDate.setHours(18),
-            bikeDataDate.setHours(20),
-            bikeDataDate.setHours(22)
+            new Date(bikeDataDateStr + ' 02:00:00'),
+            new Date(bikeDataDateStr + ' 04:00:00'),
+            new Date(bikeDataDateStr + ' 06:00:00'),
+            new Date(bikeDataDateStr + ' 08:00:00'),
+            new Date(bikeDataDateStr + ' 10:00:00'),
+            new Date(bikeDataDateStr + ' 12:00:00'),
+            new Date(bikeDataDateStr + ' 14:00:00'),
+            new Date(bikeDataDateStr + ' 16:00:00'),
+            new Date(bikeDataDateStr + ' 18:00:00'),
+            new Date(bikeDataDateStr + ' 20:00:00'),
+            new Date(bikeDataDateStr + ' 22:00:00')
           ];
 
           let x_axis = graph_elems
@@ -216,18 +210,10 @@
 
     // generate a scatter plot for each sample of blue bike data (corresponding
     // to one day from each season)
-    generateScatter("201901-bluebikes-tripdata.csv");
-    //generateScatter("201902-bluebikes-tripdata.csv");
-    //generateScatter("201903-bluebikes-tripdata.csv");
-    //generateScatter("201904-bluebikes-tripdata.csv");
-    //generateScatter("201905-bluebikes-tripdata.csv");
-    //generateScatter("201906-bluebikes-tripdata.csv");
-    //generateScatter("201907-bluebikes-tripdata.csv");
-    //generateScatter("201908-bluebikes-tripdata.csv");
-    //generateScatter("201909-bluebikes-tripdata.csv");
-    //generateScatter("201910-bluebikes-tripdata.csv");
-    //generateScatter("201911-bluebikes-tripdata.csv");
-    //generateScatter("201912-bluebikes-tripdata.csv");
+    generateScatter("bluebikedata_2020-09-01.csv");
+    generateScatter("bluebikedata_2019-12-03.csv");
+    generateScatter("bluebikedata_2020-03-03.csv");
+    generateScatter("bluebikedata_2020-06-02.csv");
   </script>
 </body>
 
