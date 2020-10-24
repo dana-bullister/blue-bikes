@@ -18,7 +18,7 @@
     // function to generate a scatter plot, given the name of an accessible csv
     // file with appropriately formatted data as well as a boolean variable of
     // whether the scatterplot should animate
-    function generateScatter(csvFileName, chartAreaElem, animate) {
+    function generateScatter(csvFileName, chartAreaID, animate) {
 
       // define a parser for parsing csv columns representing datetimes (but
       // formatted as strings) as the appropriate date objects
@@ -65,7 +65,7 @@
         y_val_min = 0,
         y_val_max = 120;
 
-      let chart_area = d3.select("#" + chartAreaElem)
+      let chart_area = d3.select("#" + chartAreaID)
 
       // add chart div
       let chart = chart_area
