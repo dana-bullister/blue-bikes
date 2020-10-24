@@ -19,7 +19,7 @@
     // file with appropriately formatted data, the ID of an HTML element into
     // which to plop the scatter plot, and a boolean value of whether the
     // scatterplot should animate
-    function generateScatter(csvFileName, chartAreaID, animate) {
+    function generateScatter(csvFileName, chartAreaID, size, animate) {
 
       // define a parser for parsing csv columns representing datetimes (but
       // formatted as strings) as the appropriate date objects
@@ -251,21 +251,21 @@
 
     // generate a scatter plot for each sample of blue bike data (corresponding
     // to one day from each season)
-    generateScatter("201909-bluebikes-tripdata.csv", "main_chart_area", true);
+    generateScatter("201909-bluebikes-tripdata.csv", "main_chart_area", "big", true);
 
     function genRestOfScatters() {
-      generateScatter("201901-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201902-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201903-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201904-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201905-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201906-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201907-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201908-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201909-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201910-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201911-bluebikes-tripdata.csv", "small_mult_chart_area", false);
-      generateScatter("201912-bluebikes-tripdata.csv", "small_mult_chart_area", false);
+      generateScatter("201901-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201902-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201903-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201904-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201905-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201906-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201907-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201908-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201909-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201910-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201911-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201912-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
     }
 
     setTimeout(genRestOfScatters, 11000);
