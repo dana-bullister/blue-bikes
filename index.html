@@ -12,8 +12,7 @@
 
   <!-- div that will contain visualization -->
   <div id="main_chart_area"></div>
-  <div id="small_mult_chart_area" class="grid-container">
-  </div>
+  <div id="small_mult_chart_area"></div>
 
   <script>
     // function to generate a scatter plot, given the name of an accessible csv
@@ -72,8 +71,8 @@
         chartAreaHeight = 400,
         xAxisTickFormat = "%-I %p",
         yAxisTickInterval = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-        dataPointRadius = 1,
-        classLabel = "";
+        dataPointRadius = 1;
+
 
       if (size == "small") { // adjust these if creating a small version of plot
         showMainTitle = false,
@@ -92,8 +91,7 @@
           chartAreaHeight = 400 * .5,
           xAxisTickFormat = "%-I",
           yAxisTickInterval = [0, 40, 80, 120],
-          dataPointRadius = 0.4,
-          classLabel = "grid-item";
+          dataPointRadius = 0.4;
       }
 
       let titleAdjustLeft = 10,
@@ -104,7 +102,6 @@
       let chart = chart_area
         .append("div")
         .attr("id", "chart")
-        .attr("class", classLabel);
 
       // add chart background
       let chart_background = chart
