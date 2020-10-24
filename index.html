@@ -52,7 +52,6 @@
         graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
 
       // set min and max values for axes
-
       let secondDay = new Date(); // variable for the second day of the month
       secondDay.setTime(bikeDataDate);
       secondDay.setDate(2);
@@ -173,7 +172,6 @@
               return point.starttime >= x_val_min && point.starttime <= x_val_max && point.tripduration >= y_val_min && point.tripduration <= y_val_max;
             });
           }
-
           bike_data = filterToWithinAxesRange(bike_data);
 
           // binding data
