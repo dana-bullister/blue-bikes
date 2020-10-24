@@ -10,7 +10,7 @@
 <body>
 
   <!-- div that will contain visualization -->
-  <div id="chart_area"></div>
+  <div id="main_chart_area"></div>
 
   <script>
     // function to generate a scatter plot, given the name of an accessible csv
@@ -40,7 +40,7 @@
       let bikeDataMonthName = monthNames[bikeDataDate.getMonth()];
 
       // set padding and spacing
-      let chart_area_padding = {
+      let main_chart_area_padding = {
           top: 90,
           right: 30,
           bottom: 70,
@@ -48,10 +48,10 @@
         },
 
         titleAdjustLeft = 10,
-        chart_area_width = 460,
-        chart_area_height = 400,
-        graph_width = chart_area_width - chart_area_padding.left - chart_area_padding.right,
-        graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
+        main_chart_area_width = 460,
+        main_chart_area_height = 400,
+        graph_width = main_chart_area_width - main_chart_area_padding.left - main_chart_area_padding.right,
+        graph_height = main_chart_area_height - main_chart_area_padding.top - main_chart_area_padding.bottom;
 
       // set min and max values for axes
       let secondDay = new Date(); // variable for the second day of the month
@@ -63,21 +63,21 @@
         y_val_min = 0,
         y_val_max = 120;
 
-      let chart_area = d3.select("#chart_area")
-        .attr("id", "chart_area")
+      let main_chart_area = d3.select("#main_chart_area")
+        .attr("id", "main_chart_area")
 
       // add chart background
-      let chart_background = chart_area
+      let chart_background = main_chart_area
         .append("svg")
         .attr("id", "chart_background")
-        .attr("width", chart_area_width)
-        .attr("height", chart_area_height)
+        .attr("width", main_chart_area_width)
+        .attr("height", main_chart_area_height)
         .attr("style", "background: lightgrey");
 
       // add chart title
       chart_background.append("text")
         .attr("text-anchor", "middle")
-        .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+        .attr("x", (graph_width / 2) + main_chart_area_padding.left - titleAdjustLeft)
         .attr("y", 30)
         .attr("font-size", 17)
         .text("Bluebike Trip Duration By Time Of Day");
@@ -85,14 +85,14 @@
       // add chart subtitles
       chart_background.append("text")
         .attr("text-anchor", "middle")
-        .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+        .attr("x", (graph_width / 2) + main_chart_area_padding.left - titleAdjustLeft)
         .attr("y", 50)
         .attr("font-size", 11)
         .text("All  Rides in Boston, Cambridge, Brookline, Somerville");
 
       chart_background.append("text")
         .attr("text-anchor", "middle")
-        .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+        .attr("x", (graph_width / 2) + main_chart_area_padding.left - titleAdjustLeft)
         .attr("y", 66)
         .attr("font-size", 11)
         .text("For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear);
@@ -100,23 +100,23 @@
       // add x-axis label
       chart_background.append("text")
         .attr("text-anchor", "middle")
-        .attr("x", (graph_width / 2) + chart_area_padding.left)
-        .attr("y", graph_height + chart_area_padding.top + 56)
+        .attr("x", (graph_width / 2) + main_chart_area_padding.left)
+        .attr("y", graph_height + main_chart_area_padding.top + 56)
         .text("Trip Start Time");
 
       // add y-axis label
       chart_background.append("text")
         .attr("text-anchor", "middle")
         .attr("transform", "rotate(-90)")
-        .attr("y", chart_area_padding.left / 2 - 5)
-        .attr("x", -chart_area_padding.top - graph_height / 2)
+        .attr("y", main_chart_area_padding.left / 2 - 5)
+        .attr("x", -main_chart_area_padding.top - graph_height / 2)
         .text("Trip Duration (Minutes)")
 
       // add  group that will contain chart elements
       let graph_elems = chart_background
         .append("g")
         .attr("id", "graph_elems")
-        .attr("transform", "translate(" + chart_area_padding.left + "," + chart_area_padding.top + ")");
+        .attr("transform", "translate(" + main_chart_area_padding.left + "," + main_chart_area_padding.top + ")");
 
       // read data
       d3.csv(csvFileName).then((bike_data) => {
