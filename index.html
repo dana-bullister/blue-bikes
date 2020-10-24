@@ -44,7 +44,7 @@
 
       // set padding and spacing
       let chart_area_padding = {
-          top: 82,
+          top: 90,
           right: 30,
           bottom: 70,
           left: 65
@@ -85,9 +85,24 @@
       chart_background.append("text")
         .attr("text-anchor", "middle")
         .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+        .attr("y", 30)
+        .attr("font-size", 17)
+        .text("Bluebike Trip Duration By Time Of Day");
+
+      // add chart subtitles
+      chart_background.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
         .attr("y", 50)
-        .attr("font-size", 40)
-        .text(bikeDataMonthName);
+        .attr("font-size", 11)
+        .text("All  Rides in Boston, Cambridge, Brookline, Somerville");
+
+      chart_background.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+        .attr("y", 66)
+        .attr("font-size", 11)
+        .text("For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear);
 
       // add x-axis label
       chart_background.append("text")
