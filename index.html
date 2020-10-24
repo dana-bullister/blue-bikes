@@ -57,7 +57,7 @@
       // set padding and spacing
       let topPadding, showMainTitle, showSubtitle1, showAxesLabels,
         subtitle2Padding, subtitle2FontSize, subtitle2Text, chart_area_padding,
-        chart_area_width, chart_area_height;
+        chart_area_width, chart_area_height, xTickFormat;
 
       if (size == "small") {
         topPadding = 62,
@@ -74,7 +74,8 @@
             left: 29
           },
           chart_area_width = 460 * .5,
-          chart_area_height = 400 * .5;
+          chart_area_height = 400 * .5,
+          xTickFormat = "%-I";
       } else {
         topPadding = 90,
           showMainTitle = true,
@@ -90,7 +91,8 @@
             left: 65
           },
           chart_area_width = 460,
-          chart_area_height = 400;
+          chart_area_height = 400,
+          xTickFormat = "%-I %p";
       }
 
       let titleAdjustLeft = 10,
@@ -190,7 +192,7 @@
             .attr("transform", "translate(0," + graph_height + ")")
             .call(d3.axisBottom(x)
               .tickValues(x_axis_ticks)
-              .tickFormat(d3.timeFormat("%-I %p")))
+              .tickFormat(d3.timeFormat(xTickFormat)))
             .selectAll("text")
             .style("text-anchor", "end")
             .attr("dx", "-.8em")
