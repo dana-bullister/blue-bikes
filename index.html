@@ -154,15 +154,18 @@
             .attr("id", "y_axis")
             .call(d3.axisLeft(y));
 
-          // parse all dates in data set as the appropriate date objects and
-          // set their corresponding day as the first of the month (that way all
-          // data points fall within same 24h period and constitute a 'typical
-          // day')
+          // format data for appropriate display
           function formatData(rowOfData) {
+
+            // parse all dates in data set as the appropriate date objects
             rowOfData.starttime = parseDatetime(rowOfData.starttime);
+
+            // set their corresponding day as the first of the month (that way all
+            // data points fall within same 24h period and constitute a 'typical
+            // day')
             rowOfData.starttime.setDate(1);
 
-          // convert all values for tripduration to minutes from seconds
+            // convert all values for tripduration to minutes from seconds
             rowOfData.tripduration = rowOfData.tripduration / 60;
           }
           bike_data.forEach(formatData);
