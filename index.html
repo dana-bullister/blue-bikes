@@ -27,8 +27,9 @@
 
       // infer the month the bike data is describing based on the file name and
       // store this as a set of useful variables
-      let bikeDataMonth = csvFileName.substring(18, 20); // e.g., "09"
-      let bikeDataDateStr = '2020-' + bikeDataMonth + '-01'; // set it to start of month
+      let bikeDataYear = csvFileName.substring(0, 4); // e.g., "2019"
+      let bikeDataMonth = csvFileName.substring(4, 6); // e.g., "09"
+      let bikeDataDateStr = bikeDataYear + '-' + bikeDataMonth + '-01'; // set it to start of month
       let bikeDataDatetimeStr = bikeDataDateStr + ' 00:00:00';
       let bikeDataDate = parseDatetime(bikeDataDatetimeStr);
 
@@ -222,7 +223,8 @@
 
     // generate a scatter plot for each sample of blue bike data (corresponding
     // to one day from each season)
-    generateScatter("bluebikedata_2020-09-01.csv");
+    //generateScatter("bluebikedata_2020-09-01.csv");
+    generateScatter("201909-bluebikes-tripdata.csv");
     //generateScatter("bluebikedata_2019-12-03.csv");
     //generateScatter("bluebikedata_2020-03-03.csv");
     //generateScatter("bluebikedata_2020-06-02.csv");
