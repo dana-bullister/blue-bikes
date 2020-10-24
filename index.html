@@ -55,26 +55,26 @@
       let chart_area = d3.select("#" + chartAreaID)
 
       // set padding and spacing
-      let top_padding, showMainTitle, showSubTitle, thirdTitlePadding, thirdTitleFontSize, thirdTitleText;
+      let topPadding, showMainTitle, showSubtitle1, subtitle2Padding, subtitle2FontSize, subtitle2Text;
 
       if (size == "small") {
-        top_padding = 82;
-        showMainTitle = false;
-        showSubTitle = false;
-        thirdTitlePadding = 50;
-        thirdTitleFontSize = 40;
-        thirdTitleText = bikeDataMonthName;
+        topPadding = 82,
+          showMainTitle = false,
+          showSubtitle1 = false,
+          subtitle2Padding = 50,
+          subtitle2FontSize = 40,
+          subtitle2Text = bikeDataMonthName;
       } else {
-        top_padding = 90;
-        showMainTitle = true;
-        showSubTitle = true;
-        thirdTitlePadding = 66;
-        thirdTitleFontSize = 11;
-        thirdTitleText = "For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear;
+        topPadding = 90,
+          showMainTitle = true,
+          showSubtitle1 = true,
+          subtitle2Padding = 66,
+          subtitle2FontSize = 11,
+          subtitle2Text = "For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear;
       }
 
       let chart_area_padding = {
-          top: top_padding,
+          top: topPadding,
           right: 30,
           bottom: 70,
           left: 65
@@ -109,7 +109,7 @@
           .text("Bluebike Trip Duration By Time Of Day");
       }
 
-      if (showSubTitle) {
+      if (showSubtitle1) {
         // add chart subtitle
         chart_background.append("text")
           .attr("text-anchor", "middle")
@@ -123,9 +123,9 @@
       chart_background.append("text")
         .attr("text-anchor", "middle")
         .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
-        .attr("y", thirdTitlePadding)
-        .attr("font-size", thirdTitleFontSize)
-        .text(thirdTitleText);
+        .attr("y", subtitle2Padding)
+        .attr("font-size", subtitle2FontSize)
+        .text(subtitle2Text);
 
       // add x-axis label
       chart_background.append("text")
