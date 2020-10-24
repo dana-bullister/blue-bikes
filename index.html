@@ -207,7 +207,10 @@
           data_points
             .transition()
             .delay(function(d, i) {
-              return (i)
+              // delay proportional to the number of seconds from the start of
+              // the day
+              let secsFromStart = (60 * 60 * d.starttime.getHours()) + (60 * d.starttime.getMinutes()) + d.starttime.getSeconds()
+              return (secsFromStart / 10)
             })
             .duration(2000)
             .attr("cx", function(d) {
