@@ -55,15 +55,14 @@
       let chart_area = d3.select("#" + chartAreaID)
 
       // set padding and spacing
-      let topPadding = 90, // related variables
-        showMainTitle = true,
+      let showMainTitle = true, // related variables
         showSubtitle1 = true,
         showAxesLabels = true,
         subtitle2Padding = 66,
         subtitle2FontSize = 11,
         subtitle2Text = "For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear,
         chart_area_padding = {
-          top: topPadding,
+          top: 90,
           right: 30,
           bottom: 70,
           left: 65
@@ -76,8 +75,7 @@
 
 
       if (size == "small") { // adjust these if creating a small version of plot
-        topPadding = 62,
-          showMainTitle = false,
+        showMainTitle = false,
           showSubtitle1 = false,
           showAxesLabels = false,
           subtitle2Padding = 32,
