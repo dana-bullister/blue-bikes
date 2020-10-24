@@ -55,12 +55,27 @@
       let chart_area = d3.select("#" + chartAreaID)
 
       // set padding and spacing
-      let topPadding, showMainTitle, showSubtitle1, showAxesLabels,
-        subtitle2Padding, subtitle2FontSize, subtitle2Text, chart_area_padding,
-        chart_area_width, chart_area_height, xTickFormat, y_axis_ticks,
-        point_radius;
+      let topPadding = 90, // related variables
+        showMainTitle = true,
+        showSubtitle1 = true,
+        showAxesLabels = true,
+        subtitle2Padding = 66,
+        subtitle2FontSize = 11,
+        subtitle2Text = "For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear,
+        chart_area_padding = {
+          top: topPadding,
+          right: 30,
+          bottom: 70,
+          left: 65
+        },
+        chart_area_width = 460,
+        chart_area_height = 400,
+        xTickFormat = "%-I %p",
+        y_axis_ticks = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+        point_radius = 1;
 
-      if (size == "small") {
+
+      if (size == "small") { // adjust these if creating a small version of plot
         topPadding = 62,
           showMainTitle = false,
           showSubtitle1 = false,
@@ -79,25 +94,6 @@
           xTickFormat = "%-I",
           y_axis_ticks = [0, 40, 80, 120],
           point_radius = 0.4;
-      } else {
-        topPadding = 90,
-          showMainTitle = true,
-          showSubtitle1 = true,
-          showAxesLabels = true,
-          subtitle2Padding = 66,
-          subtitle2FontSize = 11,
-          subtitle2Text = "For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear,
-          chart_area_padding = {
-            top: topPadding,
-            right: 30,
-            bottom: 70,
-            left: 65
-          },
-          chart_area_width = 460,
-          chart_area_height = 400,
-          xTickFormat = "%-I %p",
-          y_axis_ticks = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-          point_radius = 1;
       }
 
       let titleAdjustLeft = 10,
