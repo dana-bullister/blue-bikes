@@ -55,11 +55,22 @@
       let chart_area = d3.select("#" + chartAreaID)
 
       // set padding and spacing
-      let top_padding;
+      let top_padding, showMainTitle, showSubTitle, thirdTitlePadding, thirdTitleFontSize, thirdTitleText;
+
       if (size == "small") {
         top_padding = 82;
+        showMainTitle = false;
+        showSubTitle = false;
+        thirdTitlePadding = 50;
+        thirdTitleFontSize = 40;
+        thirdTitleText = bikeDataMonthName;
       } else {
         top_padding = 90;
+        showMainTitle = true;
+        showSubTitle = true;
+        thirdTitlePadding = 66;
+        thirdTitleFontSize = 11;
+        thirdTitleText = "For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear;
       }
 
       let chart_area_padding = {
@@ -88,39 +99,33 @@
         .attr("width", chart_area_width)
         .attr("height", chart_area_height);
 
-      if (size == "small") {
-        // add chart title
-        chart_background.append("text")
-          .attr("text-anchor", "middle")
-          .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
-          .attr("y", 50)
-          .attr("font-size", 40)
-          .text(bikeDataMonthName);
-
-      } else {
-        // add chart title
+      if (showMainTitle) {
+        // add chart main title
         chart_background.append("text")
           .attr("text-anchor", "middle")
           .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
           .attr("y", 30)
           .attr("font-size", 17)
           .text("Bluebike Trip Duration By Time Of Day");
+      }
 
-        // add chart subtitles
+      if (showSubTitle) {
+        // add chart subtitle
         chart_background.append("text")
           .attr("text-anchor", "middle")
           .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
           .attr("y", 50)
           .attr("font-size", 11)
           .text("All  Rides in Boston, Cambridge, Brookline, Somerville");
-
-        chart_background.append("text")
-          .attr("text-anchor", "middle")
-          .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
-          .attr("y", 66)
-          .attr("font-size", 11)
-          .text("For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear);
       }
+
+      // add chart third title
+      chart_background.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+        .attr("y", thirdTitlePadding)
+        .attr("font-size", thirdTitleFontSize)
+        .text(thirdTitleText);
 
       // add x-axis label
       chart_background.append("text")
