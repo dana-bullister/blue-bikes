@@ -43,8 +43,18 @@
       let bikeDataMonthName = monthNames[bikeDataDate.getMonth()];
 
       // set padding and spacing
+      let top_padding;
+      if (size == "big") {
+        top_padding = 90;
+      }
+      if (size == "small") {
+        top_padding = 82;
+      } else {
+        top_padding = 90;
+      }
+
       let chart_area_padding = {
-          top: 90,
+          top: top_padding,
           right: 30,
           bottom: 70,
           left: 65
@@ -81,28 +91,64 @@
         .attr("width", chart_area_width)
         .attr("height", chart_area_height);
 
-      // add chart title
-      chart_background.append("text")
-        .attr("text-anchor", "middle")
-        .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
-        .attr("y", 30)
-        .attr("font-size", 17)
-        .text("Bluebike Trip Duration By Time Of Day");
+      if (size == "big") {
 
-      // add chart subtitles
-      chart_background.append("text")
-        .attr("text-anchor", "middle")
-        .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
-        .attr("y", 50)
-        .attr("font-size", 11)
-        .text("All  Rides in Boston, Cambridge, Brookline, Somerville");
+        // add chart title
+        chart_background.append("text")
+          .attr("text-anchor", "middle")
+          .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+          .attr("y", 30)
+          .attr("font-size", 17)
+          .text("Bluebike Trip Duration By Time Of Day");
 
-      chart_background.append("text")
-        .attr("text-anchor", "middle")
-        .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
-        .attr("y", 66)
-        .attr("font-size", 11)
-        .text("For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear);
+        // add chart subtitles
+        chart_background.append("text")
+          .attr("text-anchor", "middle")
+          .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+          .attr("y", 50)
+          .attr("font-size", 11)
+          .text("All  Rides in Boston, Cambridge, Brookline, Somerville");
+
+        chart_background.append("text")
+          .attr("text-anchor", "middle")
+          .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+          .attr("y", 66)
+          .attr("font-size", 11)
+          .text("For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear);
+      }
+      if (size == "small") {
+        // add chart title
+        chart_background.append("text")
+          .attr("text-anchor", "middle")
+          .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+          .attr("y", 50)
+          .attr("font-size", 40)
+          .text(bikeDataMonthName);
+
+      } else {
+        // add chart title
+        chart_background.append("text")
+          .attr("text-anchor", "middle")
+          .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+          .attr("y", 30)
+          .attr("font-size", 17)
+          .text("Bluebike Trip Duration By Time Of Day");
+
+        // add chart subtitles
+        chart_background.append("text")
+          .attr("text-anchor", "middle")
+          .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+          .attr("y", 50)
+          .attr("font-size", 11)
+          .text("All  Rides in Boston, Cambridge, Brookline, Somerville");
+
+        chart_background.append("text")
+          .attr("text-anchor", "middle")
+          .attr("x", (graph_width / 2) + chart_area_padding.left - titleAdjustLeft)
+          .attr("y", 66)
+          .attr("font-size", 11)
+          .text("For a Typical Day in " + bikeDataMonthName + ' ' + bikeDataYear);
+      }
 
       // add x-axis label
       chart_background.append("text")
