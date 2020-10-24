@@ -15,7 +15,7 @@
   <script>
     // function to generate a scatter plot, given the name of an accessible csv
     // file with appropriately formatted data
-    function generateScatterAnim(csvFileName) {
+    function generateScatterAnim(csvFileName, animate) {
 
       // define a parser for parsing csv columns representing datetimes (but
       // formatted as strings) as the appropriate date objects
@@ -228,20 +228,20 @@
 
     // generate a scatter plot for each sample of blue bike data (corresponding
     // to one day from each season)
-    generateScatterAnim("201909-bluebikes-tripdata.csv");
+    generateScatterAnim("201909-bluebikes-tripdata.csv", false);
 
-    //    generateScatterAnim("201901-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201902-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201903-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201904-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201905-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201906-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201907-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201908-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201909-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201910-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201911-bluebikes-tripdata.csv");
-    //    generateScatterAnim("201912-bluebikes-tripdata.csv");
+    //    generateScatterAnim("201901-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201902-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201903-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201904-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201905-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201906-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201907-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201908-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201909-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201910-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201911-bluebikes-tripdata.csv", true);
+    //    generateScatterAnim("201912-bluebikes-tripdata.csv", true);
   </script>
 </body>
 
