@@ -56,7 +56,8 @@
 
       // set padding and spacing
       let topPadding, showMainTitle, showSubtitle1, showAxesLabels,
-        subtitle2Padding, subtitle2FontSize, subtitle2Text, chart_area_padding;
+        subtitle2Padding, subtitle2FontSize, subtitle2Text, chart_area_padding,
+        chart_area_width, chart_area_height;
 
       if (size == "small") {
         topPadding = 62,
@@ -71,7 +72,9 @@
             right: 11,
             bottom: 25,
             left: 29
-          };
+          },
+          chart_area_width = 460 * .5,
+          chart_area_height = 400 * .5;
       } else {
         topPadding = 90,
           showMainTitle = true,
@@ -85,11 +88,11 @@
             right: 30,
             bottom: 70,
             left: 65
-          };
+          },
+          chart_area_width = 460,
+          chart_area_height = 400;
       }
 
-        chart_area_width = 460,
-        chart_area_height = 400,
       let titleAdjustLeft = 10,
         graph_width = chart_area_width - chart_area_padding.left - chart_area_padding.right,
         graph_height = chart_area_height - chart_area_padding.top - chart_area_padding.bottom;
