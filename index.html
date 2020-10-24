@@ -146,8 +146,13 @@
 
           // add y axis
           let y = d3.scaleLinear()
-            .domain([y_val_min, y_val_max])
-            .range([graph_height, graph_height]); // start with all points collapsed on the bottom axis (they will animate to the correct location upon load)
+            .domain([y_val_min, y_val_max]);
+
+          if (animate) {
+            y.range([graph_height, graph_height]); // start with all points collapsed on the bottom axis (they will animate to the correct location upon load)
+          } else {
+            y.range([graph_height, 0]);
+          }
 
           let y_axis = graph_elems
             .append('g')
@@ -194,32 +199,33 @@
             .attr("fill", "rgb(63,72,204)")
             .attr("r", 1);
 
-          // animate data points to travel to their y-coordinate location from the bottom
-          // by first adjusting the range of the y-axis
-          y.range([graph_height, 0]);
+          if (animate) {
+            // animate data points to travel to their y-coordinate location from the bottom
+            // by first adjusting the range of the y-axis
+            y.range([graph_height, 0]);
 
-          chart_background.select("#y_axis")
-            .transition()
-            .duration(500)
-            .call(d3.axisLeft(y));
+            chart_background.select("#y_axis")
+              .transition()
+              .duration(500)
+              .call(d3.axisLeft(y));
 
-          // transition the points to their correct location
-          data_points
-            .transition()
-            .delay(function(d, i) {
-              // delay proportional to the number of seconds from the start of
-              // the day
-              let secsFromStart = (60 * 60 * d.starttime.getHours()) + (60 * d.starttime.getMinutes()) + d.starttime.getSeconds()
-              return (secsFromStart / 10)
-            })
-            .duration(2000)
-            .attr("cx", function(d) {
-              return x(d.starttime);
-            })
-            .attr("cy", function(d) {
-              return y(d.tripduration);
-            })
-
+            // transition the points to their correct location
+            data_points
+              .transition()
+              .delay(function(d, i) {
+                // delay proportional to the number of seconds from the start of
+                // the day
+                let secsFromStart = (60 * 60 * d.starttime.getHours()) + (60 * d.starttime.getMinutes()) + d.starttime.getSeconds()
+                return (secsFromStart / 10)
+              })
+              .duration(2000)
+              .attr("cx", function(d) {
+                return x(d.starttime);
+              })
+              .attr("cy", function(d) {
+                return y(d.tripduration);
+              })
+          }
         })
         .catch((error) => {
           console.error("Error loading the data");
