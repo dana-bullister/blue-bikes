@@ -1,13 +1,23 @@
 /* style sheet */
 
 body {
-  background-color: rgb(33,96,243);
+  background-color: lightgrey;
+}
+
+h1 {
+  font-family: sans-serif, Arial, Helvetica;
+  font-size: 9.8em;
+  margin: 0;
+  padding: 0;
+  margin-left: .15em;
 }
 
 #main_chart_area {
-  text-align: center;
+  text-align: right;
   position: relative;
-  top: 9em;
+  right: 10em;
+  display: block;
+  top: -9.3em;
 }
 
 #small_mult_chart_area {
