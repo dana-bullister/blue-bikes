@@ -1,5 +1,9 @@
 /* style sheet */
 
+body {
+  background-color: rgb(33,96,243);
+}
+
 #main_chart_area {
   text-align: center;
   position: relative;
