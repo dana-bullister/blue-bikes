@@ -24,6 +24,20 @@ h2 {
   width: 17em;
 }
 
+#small_mult_chart_title {
+  font-size: 1.4em;
+  margin-left: 7.5em;
+  opacity: 0;
+}
+
+#small_mult_chart_title2 {
+  font-size: .7em;
+  margin-left: 15em;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  opacity: 0;
+}
+
 #small_mult_chart_descript_cont {
   position: relative;
   left: 48.5em;
@@ -56,8 +70,22 @@ opacity: 0;
 #small_mult_chart_area {
   text-align: left;
   position: relative;
-  top: -16em;
+  top: -14em;
   left: 1.5em;
+}
+
+#sm_mult_y_axis_label {
+  text-anchor: "middle";
+  transform: rotate(270deg);
+  position: absolute;
+  left: -6em; /*-48em;*/
+  top: 16.5em; /*-63em;*/
+  opacity: 0;
+}
+
+#sm_mult_x_axis_label {
+  margin-left: 19em;
+  opacity: 0;
 }
 
 td {
