@@ -14,11 +14,35 @@ h1 {
 
 h2 {
   font-size: 2em;
+}
+
+#mainSubtitle {
   margin: 0;
   padding: 0;
   margin-left: 1em;
   margin-top: 1.4em;
   width: 17em;
+}
+
+#small_mult_chart_descript_cont {
+  position: relative;
+  left: 48.5em;
+  top: -46.5em;
+}
+
+#small_mult_chart_descript {
+  width: 15.5em;
+  opacity: 0;
+}
+
+#bottom_descript_cont {
+  position: relative;
+  padding: 3em;
+  top: -30em;
+}
+
+#bottom_descript {
+opacity: 0;
 }
 
 #main_chart_area {
