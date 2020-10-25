@@ -2,33 +2,38 @@
 
 body {
   background-color: lightgrey;
+  font-family: sans-serif, Arial, Helvetica;
 }
 
 h1 {
-  font-family: sans-serif, Arial, Helvetica;
   font-size: 9.8em;
   margin: 0;
   padding: 0;
   margin-left: .15em;
 }
 
+h2 {
+  font-size: 2em;
+  margin: 0;
+  padding: 0;
+  margin-left: 1em;
+  margin-top: 1.4em;
+  width: 17em;
+}
+
 #main_chart_area {
   text-align: right;
   position: relative;
-  right: 10em;
+  right: 9em;
   display: block;
-  top: -9.3em;
+  top: -22.3em;
 }
 
 #small_mult_chart_area {
-  text-align: center;
+  text-align: left;
   position: relative;
-  top: 22em;
-}
-
-#small_mult_table {
-margin-left: auto;
-margin-right: auto;
+  top: -16em;
+  left: 1.5em;
 }
 
 td {
