@@ -294,6 +294,9 @@
 
             // convert all values for tripduration to minutes from seconds
             rowOfData.tripduration = rowOfData.tripduration / 60;
+
+            // define value age of rider
+            rowOfData.age = 2019 - rowOfData['birth year'];
           }
           bike_data.forEach(formatData);
 
@@ -318,7 +321,9 @@
               return y(d.tripduration)
             })
             .attr("class", "data_point")
-            .attr("fill", "rgb(63,72,204)")
+            .attr("fill", function(d) {
+              return "rgb(" + d.age * 3 + ",72,204)"
+            })
             .attr("r", dataPointRadius);
 
           if (animate) {
