@@ -108,3 +108,13 @@ line-height: 180%;
 td {
 padding: 0.2em 0.2em;
 }
+
+.img_cont {
+  text-align: center;
+}
+
+#bluebikeimg {
+  width: 20em;
+  height: 12em;
+  opacity: 0;
+}
