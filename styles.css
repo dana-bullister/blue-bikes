@@ -11,3 +11,12 @@
   position: relative;
   top: 22em;
 }
+
+#small_mult_table {
+margin-left: auto;
+margin-right: auto;
+}
+
+td {
+padding: 0.2em 0.2em;
+}

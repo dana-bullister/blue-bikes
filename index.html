@@ -12,7 +12,54 @@
 
   <!-- div that will contain visualization -->
   <div id="main_chart_area"></div>
-  <div id="small_mult_chart_area"></div>
+  <div id="small_mult_chart_area">
+    <table id="small_mult_table">
+      <tr>
+        <td>
+          <div id="item1"></div>
+        </td>
+        <td>
+          <div id="item2"></div>
+        </td>
+        <td>
+          <div id="item3"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="item4"></div>
+        </td>
+        <td>
+          <div id="item5"></div>
+        </td>
+        <td>
+          <div id="item6"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="item7"></div>
+        </td>
+        <td>
+          <div id="item8"></div>
+        </td>
+        <td>
+          <div id="item9"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="item10"></div>
+        </td>
+        <td>
+          <div id="item11"></div>
+        </td>
+        <td>
+          <div id="item12"></div>
+        </td>
+      </tr>
+    </table>
+  </div>
 
   <script>
     // function to generate a scatter plot, given the name of an accessible csv
@@ -290,21 +337,21 @@
 
     // generate a scatter plot for each sample of blue bike data (corresponding
     // to one day from each season)
-    //generateScatter("201909-bluebikes-tripdata.csv", "main_chart_area", "big", true);
+    generateScatter("201909-bluebikes-tripdata.csv", "main_chart_area", "big", false);
 
     function genRestOfScatters() {
-      generateScatter("201901-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201902-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201903-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201904-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201905-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201906-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201907-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201908-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201909-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201910-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201911-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
-      generateScatter("201912-bluebikes-tripdata.csv", "small_mult_chart_area", "small", false);
+      generateScatter("201901-bluebikes-tripdata.csv", "item1", "small", false);
+      generateScatter("201902-bluebikes-tripdata.csv", "item2", "small", false);
+      generateScatter("201903-bluebikes-tripdata.csv", "item3", "small", false);
+      generateScatter("201904-bluebikes-tripdata.csv", "item4", "small", false);
+      generateScatter("201905-bluebikes-tripdata.csv", "item5", "small", false);
+      generateScatter("201906-bluebikes-tripdata.csv", "item6", "small", false);
+      generateScatter("201907-bluebikes-tripdata.csv", "item7", "small", false);
+      generateScatter("201908-bluebikes-tripdata.csv", "item8", "small", false);
+      generateScatter("201909-bluebikes-tripdata.csv", "item9", "small", false);
+      generateScatter("201910-bluebikes-tripdata.csv", "item10", "small", false);
+      generateScatter("201911-bluebikes-tripdata.csv", "item11", "small", false);
+      generateScatter("201912-bluebikes-tripdata.csv", "item12", "small", false);
     }
 
     setTimeout(genRestOfScatters, 0);
