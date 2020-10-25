@@ -54,11 +54,13 @@ h2 {
 #bottom_descript_cont {
   position: relative;
   padding: 3em;
-  top: -30em;
+  top: -42em;
 }
 
 #bottom_descript {
 opacity: 0;
+font-size: 1.2em;
+line-height: 180%;
 }
 
 #main_chart_area {
