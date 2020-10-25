@@ -44,7 +44,14 @@ h2 {
   top: -45.5em;
 }
 
-#small_mult_chart_descript {
+.small_mult_chart_descript1 {
+  width: 23em;
+  opacity: 0;
+  font-size: 1.2em;
+  line-height: 180%;
+}
+
+.small_mult_chart_descript2 {
   width: 23em;
   opacity: 0;
   font-size: 1.2em;
