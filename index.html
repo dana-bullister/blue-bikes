@@ -76,16 +76,16 @@
       outside a duration of 120 minutes are excluded, as are rides less than 1 minute.</h2>
   </div>
   <div id="bottom_descript_cont">
-    <h2 id="bottom_descript">The scatterplot small multiple illustrates patterns in Bluebikes usage across months as well as unique characteristics within months. We can see that, overall, Bluebikes tend to be used between 6am and 10pm, with the
+    <h2 id="bottom_descript1">The scatterplot small multiple illustrates patterns in Bluebikes usage across months as well as unique characteristics within months. We can see that, overall, Bluebikes tend to be used between 6am and 10pm, with the
       majority of rides between 8am and 8pm. Those rides closer to the middle of the day are more likely to be of longer duration; e.g., longer than 40 minutes. Across months we can also see slightly larger clusters of rides occurring around 8am and
-      6pm, probably corresponding to commutes to and from work.
-
-      Summer and fall months tend to have the most daily rides, while fewer daily rides occur in December through March. Rides in these months also tend to be shorter in duration, proably because of colder weather.
+      6pm, probably corresponding to commutes to and from work.</h2>
+    <h2 id="bottom_descript2">Summer and fall months tend to have the most daily rides, while fewer daily rides occur in December through March. Rides in these months also tend to be shorter in duration, proably because of colder weather.
 
       Regardless of month, however, there are always a substantial number of Bluebike riders, many of whom likely use the system for daily work commutes. In addition to being equitable, sustainable, and healthful, bikes are used by tens of thousands
+      and contribute
       to the rich ecosystem of urban transportation.
 
-      https://www.bluebikes.com/about/media-kit</h2>
+      <a href="https://www.bluebikes.com/about/media-kit">Learn more</a></h2>
   </div>
   <script>
     // function to generate a scatter plot, given the name of an accessible csv
@@ -393,7 +393,10 @@
       d3.select(".small_mult_chart_descript2")
         .style("opacity", 1);
 
-      d3.select("#bottom_descript")
+      d3.select("#bottom_descript1")
+        .style("opacity", 1);
+
+      d3.select("#bottom_descript2")
         .style("opacity", 1);
 
       d3.select("#small_mult_chart_title")
