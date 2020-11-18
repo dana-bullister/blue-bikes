@@ -95,7 +95,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
       ],
       xTickLabelTilt = 0,
       xTickLabelAnchor = 'start',
-      yAxisTickInterval = [0, 40, 80, 120],
+      yAxisTickInterval = [0, y_val_max / 2, y_val_max],
       dataPointRadius = 0.4;
   }
 
