@@ -79,7 +79,7 @@ line-height: 180%;
 #main_chart_area {
   text-align: right;
   position: relative;
-  right: 9em;
+  right: 0em;
   display: block;
   top: -22.3em;
 }
