@@ -33,7 +33,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
   let x_val_min = bikeDataDate,
     x_val_max = secondDay,
     y_val_min = 0,
-    y_val_max = 120;
+    y_val_max = 50;
 
   let chart_area = d3.select("#" + chartAreaID)
 
