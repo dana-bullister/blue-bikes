@@ -176,6 +176,12 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
   // read data
   d3.csv(csvFileName).then((bike_data) => {
 
+      let tripDurSum = 0;
+      for (let i = 0; i < bike_data.length; i++) {
+        tripDurSum += parseInt(bike_data[i]['tripduration'], 10) / 60; //don't forget to add the base
+      }
+      let tripDurAvg = tripDurSum / bike_data.length;
+
       // add x axis
       let x = d3.scaleLinear()
         .domain([x_val_min, x_val_max])
@@ -215,8 +221,8 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
       graph_elems.append("svg:line")
         .attr("x1", 0)
         .attr("x2", graph_width)
-        .attr("y1", 50)
-        .attr("y2", 50)
+        .attr("y1", y(tripDurAvg))
+        .attr("y2", y(tripDurAvg))
         .style("stroke", "rgb(189, 189, 189)");
 
       // format data for appropriate display
