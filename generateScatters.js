@@ -211,6 +211,14 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
           .tickValues(yAxisTickInterval)
         );
 
+      // add horizontal line representing average y-value
+      graph_elems.append("svg:line")
+        .attr("x1", 0)
+        .attr("x2", graph_width)
+        .attr("y1", 50)
+        .attr("y2", 50)
+        .style("stroke", "rgb(189, 189, 189)");
+
       // format data for appropriate display
       function formatData(rowOfData) {
 
