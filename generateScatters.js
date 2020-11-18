@@ -33,7 +33,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
   let x_val_min = bikeDataDate,
     x_val_max = secondDay,
     y_val_min = 0,
-    y_val_max = 50;
+    y_val_max = 30;
 
   let chart_area = d3.select("#" + chartAreaID)
 
@@ -178,7 +178,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
 
       let tripDurSum = 0;
       let numIncludedPoints = 0;
-      let outlierThreshold = 300;
+      let outlierThreshold = 1000;
 
       for (let i = 0; i < bike_data.length; i++) {
         let tripDurInMin = parseInt(bike_data[i]['tripduration'], 10) / 60;
