@@ -223,6 +223,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
         .attr("x2", graph_width)
         .attr("y1", y(tripDurAvg))
         .attr("y2", y(tripDurAvg))
+        .attr("id", "horizLine")
         .style("stroke", "rgb(189, 189, 189)");
 
       // format data for appropriate display

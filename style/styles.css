@@ -105,6 +105,11 @@ line-height: 180%;
   opacity: 0;
 }
 
+#horizLine {
+  stroke-width: 2;
+  color: grey;
+}
+
 td {
 padding: 0.2em 0.2em;
 }
