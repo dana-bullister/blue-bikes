@@ -177,10 +177,17 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
   d3.csv(csvFileName).then((bike_data) => {
 
       let tripDurSum = 0;
+      let numIncludedPoints = 0;
+      let outlierThreshold = 300;
+
       for (let i = 0; i < bike_data.length; i++) {
-        tripDurSum += parseInt(bike_data[i]['tripduration'], 10) / 60; //don't forget to add the base
+        let tripDurInMin = parseInt(bike_data[i]['tripduration'], 10) / 60;
+        if (tripDurInMin <= outlierThreshold) {
+          tripDurSum += tripDurInMin; //don't forget to add the base
+          numIncludedPoints += 1;
+        }
       }
-      let tripDurAvg = tripDurSum / bike_data.length;
+      let tripDurAvg = tripDurSum / numIncludedPoints;
 
       // add x axis
       let x = d3.scaleLinear()
