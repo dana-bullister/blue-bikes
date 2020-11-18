@@ -53,6 +53,21 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
     chartAreaWidth = 460,
     chartAreaHeight = 400,
     xAxisTickFormat = "%-I %p",
+    x_axis_ticks = [
+      new Date(bikeDataDateStr + ' 02:00:00'),
+      new Date(bikeDataDateStr + ' 04:00:00'),
+      new Date(bikeDataDateStr + ' 06:00:00'),
+      new Date(bikeDataDateStr + ' 08:00:00'),
+      new Date(bikeDataDateStr + ' 10:00:00'),
+      new Date(bikeDataDateStr + ' 12:00:00'),
+      new Date(bikeDataDateStr + ' 14:00:00'),
+      new Date(bikeDataDateStr + ' 16:00:00'),
+      new Date(bikeDataDateStr + ' 18:00:00'),
+      new Date(bikeDataDateStr + ' 20:00:00'),
+      new Date(bikeDataDateStr + ' 22:00:00')
+    ],
+    xTickLabelTilt = -65,
+    xTickLabelAnchor = 'end',
     yAxisTickInterval = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
     dataPointRadius = 1;
 
@@ -72,7 +87,14 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
       },
       chartAreaWidth = 460 * .35,
       chartAreaHeight = 400 * .35,
-      xAxisTickFormat = "%H",
+      xAxisTickFormat = "%-I %p",
+      x_axis_ticks = [
+        new Date(bikeDataDateStr + ' 03:00:00'),
+        new Date(bikeDataDateStr + ' 12:00:00'),
+        new Date(bikeDataDateStr + ' 21:00:00')
+      ],
+      xTickLabelTilt = 0,
+      xTickLabelAnchor = 'start',
       yAxisTickInterval = [0, 40, 80, 120],
       dataPointRadius = 0.4;
   }
@@ -159,21 +181,6 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
         .domain([x_val_min, x_val_max])
         .range([0, graph_width]);
 
-      // specify where want x-axis tick marks placed
-      let x_axis_ticks = [
-        new Date(bikeDataDateStr + ' 02:00:00'),
-        new Date(bikeDataDateStr + ' 04:00:00'),
-        new Date(bikeDataDateStr + ' 06:00:00'),
-        new Date(bikeDataDateStr + ' 08:00:00'),
-        new Date(bikeDataDateStr + ' 10:00:00'),
-        new Date(bikeDataDateStr + ' 12:00:00'),
-        new Date(bikeDataDateStr + ' 14:00:00'),
-        new Date(bikeDataDateStr + ' 16:00:00'),
-        new Date(bikeDataDateStr + ' 18:00:00'),
-        new Date(bikeDataDateStr + ' 20:00:00'),
-        new Date(bikeDataDateStr + ' 22:00:00')
-      ];
-
       let x_axis = graph_elems
         .append('g')
         .attr("id", "x_axis")
@@ -182,10 +189,10 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
           .tickValues(x_axis_ticks)
           .tickFormat(d3.timeFormat(xAxisTickFormat)))
         .selectAll("text")
-        .style("text-anchor", "end")
+        .style("text-anchor", xTickLabelAnchor)
         .attr("dx", "-.8em")
         .attr("dy", ".15em")
-        .attr("transform", "rotate(-65)");
+        .attr("transform", "rotate(" + xTickLabelTilt + ")");
 
       // add y axis
       let y = d3.scaleLinear()
