@@ -178,7 +178,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
 
       let tripDurSum = 0;
       let numIncludedPoints = 0;
-      let outlierThreshold = 1000;
+      let outlierThreshold = 600;
 
       for (let i = 0; i < bike_data.length; i++) {
         let tripDurInMin = parseInt(bike_data[i]['tripduration'], 10) / 60;
