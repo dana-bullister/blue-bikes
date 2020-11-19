@@ -50,8 +50,8 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
       bottom: 70,
       left: 65
     },
-    chartAreaWidth = 460,
-    chartAreaHeight = 400,
+    chartAreaWidth = 660,
+    chartAreaHeight = 600,
     xAxisTickFormat = "%-I %p",
     x_axis_ticks = [
       new Date(bikeDataDateStr + ' 02:00:00'),
@@ -85,8 +85,8 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
         bottom: 25,
         left: 29
       },
-      chartAreaWidth = 460 * .35,
-      chartAreaHeight = 400 * .35,
+      chartAreaWidth = chartAreaWidth * .35,
+      chartAreaHeight = chartAreaHeight * .35,
       xAxisTickFormat = "%-I %p",
       x_axis_ticks = [
         new Date(bikeDataDateStr + ' 03:00:00'),
