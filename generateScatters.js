@@ -85,8 +85,9 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
         bottom: 25,
         left: 29
       },
-      chartAreaWidth = chartAreaWidth * .35,
-      chartAreaHeight = chartAreaHeight * .35,
+      smallMultChartScaling = .40,
+      chartAreaWidth = chartAreaWidth * smallMultChartScaling,
+      chartAreaHeight = chartAreaHeight * smallMultChartScaling,
       xAxisTickFormat = "%-I %p",
       x_axis_ticks = [
         new Date(bikeDataDateStr + ' 03:00:00'),
