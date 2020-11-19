@@ -2,7 +2,7 @@
 // file with appropriately formatted data, the ID of an HTML element into
 // which to plop the scatter plot, and a boolean value of whether the
 // scatterplot should animate
-function generateScatter(csvFileName, chartAreaID, size, animate) {
+function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
 
   // define a parser for parsing csv columns representing datetimes (but
   // formatted as strings) as the appropriate date objects
@@ -32,8 +32,8 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
 
   let x_val_min = bikeDataDate,
     x_val_max = secondDay,
-    y_val_min = 0,
-    y_val_max = 30;
+    y_val_min = 0;
+  // y_val_max has already been defined
 
   let chart_area = d3.select("#" + chartAreaID)
 
@@ -308,21 +308,21 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
 
 // generate a scatter plot for each sample of blue bike data (corresponding
 // to one day from each season)
-generateScatter("201909-bluebikes-tripdata.csv", "main_chart_area", "big", true);
+generateScatter("201909-bluebikes-tripdata.csv", "main_chart_area", "big", true, 100);
 
 function genRestOfScatters() {
-  generateScatter("201901-bluebikes-tripdata.csv", "item1", "small", false);
-  generateScatter("201902-bluebikes-tripdata.csv", "item2", "small", false);
-  generateScatter("201903-bluebikes-tripdata.csv", "item3", "small", false);
-  generateScatter("201904-bluebikes-tripdata.csv", "item4", "small", false);
-  generateScatter("201905-bluebikes-tripdata.csv", "item5", "small", false);
-  generateScatter("201906-bluebikes-tripdata.csv", "item6", "small", false);
-  generateScatter("201907-bluebikes-tripdata.csv", "item7", "small", false);
-  generateScatter("201908-bluebikes-tripdata.csv", "item8", "small", false);
-  generateScatter("201909-bluebikes-tripdata.csv", "item9", "small", false);
-  generateScatter("201910-bluebikes-tripdata.csv", "item10", "small", false);
-  generateScatter("201911-bluebikes-tripdata.csv", "item11", "small", false);
-  generateScatter("201912-bluebikes-tripdata.csv", "item12", "small", false);
+  generateScatter("201901-bluebikes-tripdata.csv", "item1", "small", false, 30);
+  generateScatter("201902-bluebikes-tripdata.csv", "item2", "small", false, 30);
+  generateScatter("201903-bluebikes-tripdata.csv", "item3", "small", false, 30);
+  generateScatter("201904-bluebikes-tripdata.csv", "item4", "small", false, 30);
+  generateScatter("201905-bluebikes-tripdata.csv", "item5", "small", false, 30);
+  generateScatter("201906-bluebikes-tripdata.csv", "item6", "small", false, 30);
+  generateScatter("201907-bluebikes-tripdata.csv", "item7", "small", false, 30);
+  generateScatter("201908-bluebikes-tripdata.csv", "item8", "small", false, 30);
+  generateScatter("201909-bluebikes-tripdata.csv", "item9", "small", false, 30);
+  generateScatter("201910-bluebikes-tripdata.csv", "item10", "small", false, 30);
+  generateScatter("201911-bluebikes-tripdata.csv", "item11", "small", false, 30);
+  generateScatter("201912-bluebikes-tripdata.csv", "item12", "small", false, 30);
 
   // display associated labelling
   d3.select(".small_mult_chart_descript1")
