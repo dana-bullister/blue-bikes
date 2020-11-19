@@ -44,7 +44,7 @@ p {
   margin: 0;
 }
 
-#small_mult_chart_title2 {
+.smallMultChartDescr {
   font-size: 2em;
   line-height: 1.2em;
 }
@@ -76,8 +76,4 @@ p {
 #horizLine {
   stroke-width: 2;
   color: grey;
-}
-
-.chartDescription {
-  font-size: 2.5em;
 }
