@@ -45,7 +45,8 @@ p {
 }
 
 #small_mult_chart_title2 {
-  font-size: 2.5em;
+  font-size: 2em;
+  line-height: 1.2em;
 }
 
 #small_mult_table_cont {
