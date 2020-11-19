@@ -53,6 +53,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
     chartAreaWidth = 560,
     chartAreaHeight = 500,
     xAxisTickFormat = "%-I %p",
+    xAxisTickPadding = 0,
     x_axis_ticks = [
       new Date(bikeDataDateStr + ' 02:00:00'),
       new Date(bikeDataDateStr + ' 04:00:00'),
@@ -89,6 +90,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
       chartAreaWidth = chartAreaWidth * smallMultChartScaling,
       chartAreaHeight = chartAreaHeight * smallMultChartScaling,
       xAxisTickFormat = "%-I %p",
+      xAxisTickPadding = 9,
       x_axis_ticks = [
         new Date(bikeDataDateStr + ' 03:00:00'),
         new Date(bikeDataDateStr + ' 12:00:00'),
@@ -202,7 +204,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
         .call(d3.axisBottom(x)
           .tickValues(x_axis_ticks)
           .tickFormat(d3.timeFormat(xAxisTickFormat))
-          .tickPadding(9))
+          .tickPadding(xAxisTickPadding))
         .selectAll("text")
         .style("text-anchor", xTickLabelAnchor)
         .attr("dx", "-.8em")
