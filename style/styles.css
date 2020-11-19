@@ -57,6 +57,7 @@ p {
 
 .item {
   display: inline-block;
+  margin: .2em;
 }
 
 .row {
