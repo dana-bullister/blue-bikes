@@ -41,7 +41,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
   let showMainTitle = true, // related variables
     showSubtitle1 = true,
     showAxesLabels = true,
-    subtitle2Padding = 66,
+    subtitle2Padding = 82,
     subtitle2FontSize = "1em",
     subtitle2Text = "For an Average Day in " + bikeDataMonthName + ', ' + bikeDataYear,
     chartAreaPadding = {
@@ -134,7 +134,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
       .attr("font-family", "sans-serif, Arial, Helvetica")
       .attr("text-anchor", "middle")
       .attr("x", (graph_width / 2) + chartAreaPadding.left - titleAdjustLeft)
-      .attr("y", 50)
+      .attr("y", 59)
       .attr("font-size", "1em")
       .text("All  Rides in Boston, Cambridge, Brookline, Somerville");
   }
