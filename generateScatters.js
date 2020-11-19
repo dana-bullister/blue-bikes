@@ -155,7 +155,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
       .attr("font-family", "sans-serif, Arial, Helvetica")
       .attr("text-anchor", "middle")
       .attr("x", (graph_width / 2) + chartAreaPadding.left)
-      .attr("y", graph_height + chartAreaPadding.top + 56)
+      .attr("y", graph_height + chartAreaPadding.top)
       .text("Trip Start Time");
 
     // add y-axis label
