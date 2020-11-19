@@ -64,6 +64,11 @@ p {
   display: block;
 }
 
+#sm_mult_x_axis_label {
+  font-size: 1.5em;
+  margin-top: .3em;
+}
+
 #sm_mult_y_axis_label {
   margin-right: 25%;
 }
