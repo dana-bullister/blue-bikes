@@ -15,6 +15,10 @@ body {
   flex-wrap: nowrap;
 }
 
+#mainText {
+  padding: 1em;
+}
+
 h1 {
   font-size: 6em;
   margin: 0;
