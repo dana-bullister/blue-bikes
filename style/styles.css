@@ -7,9 +7,6 @@ body {
 
 h1 {
   font-size: 9.8em;
-  margin: 0;
-  padding: 0;
-  margin-left: .15em;
 }
 
 p {
@@ -17,31 +14,17 @@ p {
 }
 
 #mainSubtitle {
-  margin: 0;
-  padding: 0;
-  margin-left: 1.4em;
-  margin-top: 1.4em;
   width: 17em;
 }
 
 #small_mult_chart_title {
   font-size: 1.4em;
-  margin-left: 7.5em;
   opacity: 0;
 }
 
 #small_mult_chart_title2 {
   font-size: .7em;
-  margin-left: 15em;
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
   opacity: 0;
-}
-
-#small_mult_chart_descript_cont {
-  position: relative;
-  left: 49.5em;
-  top: -45.5em;
 }
 
 .small_mult_chart_descript1 {
@@ -58,12 +41,6 @@ p {
   line-height: 180%;
 }
 
-#bottom_descript_cont {
-  position: relative;
-  padding: 3em;
-  top: -45em;
-}
-
 #bottom_descript1 {
 opacity: 0;
 font-size: 1.2em;
@@ -78,38 +55,19 @@ line-height: 180%;
 
 #main_chart_area {
   text-align: right;
-  position: relative;
-  right: 0em;
-  display: block;
-  top: -22.3em;
-}
-
-#small_mult_chart_area {
-  text-align: left;
-  position: relative;
-  top: -14em;
-  left: 1.5em;
 }
 
 #sm_mult_y_axis_label {
   text-anchor: "middle";
   transform: rotate(270deg);
-  position: absolute;
-  left: -6em; /*-48em;*/
-  top: 16.5em; /*-63em;*/
   opacity: 0;
 }
 
 #sm_mult_x_axis_label {
-  margin-left: 17em;
   opacity: 0;
 }
 
 #horizLine {
   stroke-width: 2;
   color: grey;
-}
-
-td {
-padding: 0.2em 0.2em;
 }
