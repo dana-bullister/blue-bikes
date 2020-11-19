@@ -85,7 +85,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
         bottom: 25,
         left: 29
       },
-      smallMultChartScaling = .40,
+      smallMultChartScaling = .34,
       chartAreaWidth = chartAreaWidth * smallMultChartScaling,
       chartAreaHeight = chartAreaHeight * smallMultChartScaling,
       xAxisTickFormat = "%-I %p",
