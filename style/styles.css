@@ -2,29 +2,39 @@
 
 body {
   background-color: lightgrey;
-  font-family: Arial, Helvetica, sans-serif ;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5em;
 }
 
 h1 {
-  font-size: 9.8em;
+  font-size: 10em;
+  margin: 0;
 }
 
 p {
-  font-size: 3em;
+  font-size: 5em;
+  line-height: 1.5em;
 }
 
-#mainSubtitle {
-  width: 17em;
+#main_chart_area_cont {
+  background-color: green;
+  width: 100%;
+  text-align: center;
+  margin: 5em;
+}
+
+#main_chart_area {
+  display: inline-block;
+  margin: 0 auto;
 }
 
 #small_mult_chart_title {
-  font-size: 1.4em;
-  opacity: 0;
+  font-weight: bold;
+  margin: 0;
 }
 
 #small_mult_chart_title2 {
-  font-size: .7em;
-  opacity: 0;
+  font-size: 2.5em;
 }
 
 .small_mult_chart_descript1 {

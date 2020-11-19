@@ -11,12 +11,12 @@
 <body>
 
   <!-- div that will contain visualization -->
-  <h1>A City In<br>Motion</h1>
+  <h1>A City In Motion</h1>
   <p id="mainSubtitle">Boston's Bluebike system supports more than 12,000 rides per day throughout Boston, Cambridge, Brookline, and Somerville. </p>
-  <div id="main_chart_area"></div>
+  <div id="main_chart_area_cont"><div id="main_chart_area"></div></div>
   <div id="small_mult_chart_area">
-    <div id="small_mult_chart_title">Blue Bike Duration by Time of Day</div>
-    <div id="small_mult_chart_title2">All Rides in Greater Boston During an Average Day in Each Month, 2019<br>(horizontal line indicates trip duration mean, sans outliers)</div>
+    <p id="small_mult_chart_title">Blue Bike Duration by Time of Day</p>
+    <p id="small_mult_chart_title2">All Rides in Greater Boston During an Average Day in Each Month, 2019<br>(horizontal line indicates trip duration mean, sans outliers)</p>
     <div id="small_mult_table">
       <div>
           <div id="item1"></div>
@@ -38,7 +38,7 @@
                 <div id="item12"></div>
           </div>
     </div>
-    
+
     <div id="sm_mult_y_axis_label">Trip Duration (Minutes)</div>
     <div id="sm_mult_x_axis_label">Start Time</div>
 
