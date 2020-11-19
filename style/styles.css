@@ -3,7 +3,7 @@
 body {
   background-color: lightgrey;
   font-family: Arial, Helvetica, sans-serif;
-  padding: 5em;
+  padding: 2.5em;
 }
 
 h1 {
@@ -12,15 +12,14 @@ h1 {
 }
 
 p {
-  font-size: 5em;
+  font-size: 2.5em;
   line-height: 1.5em;
 }
 
 #main_chart_area_cont {
-  background-color: green;
   width: 100%;
   text-align: center;
-  margin: 5em;
+  margin: 2.5em;
 }
 
 #main_chart_area {
@@ -38,7 +37,6 @@ p {
 }
 
 #small_mult_table_cont {
-  background-color: green;
   width: 100%;
   text-align: center;
   margin: 5em;
@@ -52,47 +50,15 @@ p {
   display: block;
 }
 
-.small_mult_chart_descript1 {
-  width: 23em;
-  opacity: 0;
-  font-size: 1.2em;
-  line-height: 180%;
-}
-
-.small_mult_chart_descript2 {
-  width: 23em;
-  opacity: 0;
-  font-size: 1.2em;
-  line-height: 180%;
-}
-
-#bottom_descript1 {
-opacity: 0;
-font-size: 1.2em;
-line-height: 180%;
-}
-
-#bottom_descript2 {
-opacity: 0;
-font-size: 1.2em;
-line-height: 180%;
-}
-
-#main_chart_area {
-  text-align: right;
-}
-
 #sm_mult_y_axis_label {
-  text-anchor: "middle";
-  transform: rotate(270deg);
-  opacity: 0;
-}
-
-#sm_mult_x_axis_label {
-  opacity: 0;
+  margin-right: 25%;
 }
 
 #horizLine {
   stroke-width: 2;
   color: grey;
+}
+
+.chartDescription {
+  font-size: 2.5em;
 }
