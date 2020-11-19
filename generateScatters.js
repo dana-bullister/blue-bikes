@@ -42,7 +42,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
     showSubtitle1 = true,
     showAxesLabels = true,
     subtitle2Padding = 66,
-    subtitle2FontSize = 11,
+    subtitle2FontSize = "1em",
     subtitle2Text = "For an Average Day in " + bikeDataMonthName + ', ' + bikeDataYear,
     chartAreaPadding = {
       top: 95,
@@ -123,7 +123,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
       .attr("text-anchor", "middle")
       .attr("x", (graph_width / 2) + chartAreaPadding.left - titleAdjustLeft)
       .attr("y", 30)
-      .attr("font-size", 22)
+      .attr("font-size", "1.5em")
       .attr("font-family", "Helvetica")
       .text("Bluebike Trip Duration By Time Of Day");
   }
@@ -135,7 +135,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate) {
       .attr("text-anchor", "middle")
       .attr("x", (graph_width / 2) + chartAreaPadding.left - titleAdjustLeft)
       .attr("y", 50)
-      .attr("font-size", 11)
+      .attr("font-size", "1em")
       .text("All  Rides in Boston, Cambridge, Brookline, Somerville");
   }
 
