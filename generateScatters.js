@@ -45,13 +45,13 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
     subtitle2FontSize = "1em",
     subtitle2Text = "For an Average Day in " + bikeDataMonthName + ', ' + bikeDataYear,
     chartAreaPadding = {
-      top: 95,
+      top: 130,
       right: 30,
-      bottom: 70,
+      bottom: 130,
       left: 65
     },
     chartAreaWidth = 560,
-    chartAreaHeight = 500,
+    chartAreaHeight = 600,
     xAxisTickFormat = "%-I %p",
     xAxisTickPadding = 0,
     x_axis_ticks = [
@@ -115,7 +115,6 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
   let chart_background = chart
     .append("svg")
     .attr("id", "chart_background")
-    .attr("style", "background: rgb(253,253,253)")
     .attr("width", chartAreaWidth)
     .attr("height", chartAreaHeight);
 
@@ -157,7 +156,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
       .attr("font-family", "sans-serif, Arial, Helvetica")
       .attr("text-anchor", "middle")
       .attr("x", (graph_width / 2) + chartAreaPadding.left)
-      .attr("y", graph_height + chartAreaPadding.top + .8 * chartAreaPadding.bottom)
+      .attr("y", graph_height + chartAreaPadding.top + 60)
       .text("Trip Start Time");
 
     // add y-axis label
@@ -235,7 +234,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
         .attr("y1", y(tripDurAvg))
         .attr("y2", y(tripDurAvg))
         .attr("id", "horizLine")
-        .style("stroke", "rgb(189, 189, 189)");
+        .style("stroke", "black");
 
       // format data for appropriate display
       function formatData(rowOfData) {
@@ -274,7 +273,7 @@ function generateScatter(csvFileName, chartAreaID, size, animate, y_val_max) {
           return y(d.tripduration)
         })
         .attr("class", "data_point")
-        .attr("fill", "rgb(63,72,204)")
+        .attr("fill", "darkblue")
         .attr("r", dataPointRadius);
 
       if (animate) {
